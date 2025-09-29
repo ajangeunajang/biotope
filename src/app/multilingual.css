@@ -1,0 +1,33 @@
+/* 폰트 정의 */
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/font/PretendardVariable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'ballpill';
+  src: url('/font/BallPill-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+body {
+  font-family:'Pretendard', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+
+/* 영문 텍스트 */
+span.ml-en {
+  font-size: 14px;
+  font-family: 'ballpill', sans-serif;
+  /* baseline shift */
+  position: relative;
+  top: 0;
+}

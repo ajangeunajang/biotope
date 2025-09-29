@@ -1,13 +1,24 @@
+'use client';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 export default function Home() {
+  useEffect(() => {
+    // multilingual.js 초기화
+    if (typeof window !== 'undefined' && window.Multilingual) {
+      const ml = new window.Multilingual({
+        containers: document.getElementsByClassName('div'),
+        configuration: ['en', 'num'],
+      });
+    }
+  }, []);
   return (
     <div>
       <Image
-        src="/bg5.png"
+        src="/bg.png"
         alt="background"
-        width={800}
-        height={800}
+        width={1200}
+        height={1000}
         className="fixed top-0 left-0 w-full h-full object-cover mix-blend-saturation"
       />
       <header className="fixed">
@@ -28,7 +39,7 @@ export default function Home() {
         </div>
         <nav className="fixed w-full top-0 left-1/2 -translate-x-1/2 p-4">
           <ul className="flex flex-col items-center gap-6">
-            <li className="h-full">
+            <li className="h-full hover:invert hover:blur-xs transition-all duration-600">
               <svg
                 width="359"
                 height="141"
@@ -59,7 +70,7 @@ export default function Home() {
                 />
               </svg>
             </li>
-            <li className="h-full">
+            <li className="h-full hover:invert hover:blur-xs transition-all duration-600">
               <svg
                 width="523"
                 height="142"
@@ -102,7 +113,7 @@ export default function Home() {
                 />
               </svg>
             </li>
-            <li className="h-full">
+            <li className="h-full hover:invert hover:blur-xs transition-all duration-600">
               <svg
                 width="203"
                 height="136"
@@ -128,6 +139,33 @@ export default function Home() {
           </ul>
         </nav>
       </header>
+      <main>
+        <div className="fixed top-0 right-0 w-2/3 h-3/4 bg-black/50 rounded-[100px] m-4 p-8 text-white flex gap-4 items-start">
+          <table className="flex-1">
+            <tr>
+              <td className="pr-8">w</td>
+              <td className="pr-8">biotope-lab.com</td>
+            </tr>
+            <tr>
+              <td className="pr-8">t</td>
+              <td className="pr-8">070-4571-9907</td>
+            </tr>
+            <tr>
+              <td className="pr-8">m</td>
+              <td className="pr-8">info@biotope-lab.com</td>
+            </tr>
+          </table>
+          <div className="flex-1">
+            비오톱에 관하여 설명 문장 어쩌구 도심 속에서 자연은 더 이상 '그대로'
+            존재하지 않습니다. 인공의 층위 속에 새롭게 조성된 작은 생태 공간,
+            비오톱Biotope은 바로 그 '도심 속 인공 생태 서식지'에서 출발합니다.
+            자연과 인공, 현실과 가상이 공존하는 지점을 탐색하며, 감각적이고
+            실험적인 미디어 아트 경험을 만들어갑니다. HMD·스마트 글라스·스크린
+            등 다양한 디지털 프레임을 통해 비오톱은 도시의 숨은 생태와 가상의
+            세계를 오가는 경험을 제안합니다.
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
