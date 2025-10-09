@@ -1,17 +1,7 @@
 'use client';
 import Image from 'next/image';
-import { useEffect } from 'react';
 
 export default function Home() {
-  useEffect(() => {
-    // multilingual.js 초기화
-    if (typeof window !== 'undefined' && window.Multilingual) {
-      const ml = new window.Multilingual({
-        containers: document.getElementsByClassName('div'),
-        configuration: ['en', 'num'],
-      });
-    }
-  }, []);
   return (
     <div>
       <Image
@@ -19,7 +9,7 @@ export default function Home() {
         alt="background"
         width={1200}
         height={1000}
-        className="fixed top-0 left-0 w-full h-full object-cover mix-blend-saturation"
+        className="fixed top-0 left-0 w-full h-full object-cover mix-blend-saturation duration-1000 animate-fade-in"
       />
       <header className="fixed">
         <div className="fixed bottom-0 left-1/2 -translate-x-1/2 p-4">
@@ -156,13 +146,13 @@ export default function Home() {
             </tr>
           </table>
           <div className="flex-1">
-            비오톱에 관하여 설명 문장 어쩌구 도심 속에서 자연은 더 이상 '그대로'
-            존재하지 않습니다. 인공의 층위 속에 새롭게 조성된 작은 생태 공간,
-            비오톱Biotope은 바로 그 '도심 속 인공 생태 서식지'에서 출발합니다.
-            자연과 인공, 현실과 가상이 공존하는 지점을 탐색하며, 감각적이고
-            실험적인 미디어 아트 경험을 만들어갑니다. HMD·스마트 글라스·스크린
-            등 다양한 디지털 프레임을 통해 비오톱은 도시의 숨은 생태와 가상의
-            세계를 오가는 경험을 제안합니다.
+            비오톱에 관하여. 푸른 바다 위로 햇살이 반짝이며 물결이 잔잔하게
+            흔들린다. 바람은 부드럽게 스쳐 지나가고, 새들은 자유롭게 하늘을
+            날아오른다. 사람들의 웃음소리가 멀리서 들려오며 평화로운 오후가
+            이어진다. 도시의 거리는 분주하지만 그 안에서도 따뜻한 온기가
+            느껴진다. 커피 향이 골목 사이로 퍼지고, 사람들은 각자의 하루를
+            살아간다. 해가 저물면 붉은 노을이 건물 사이를 물들이고, 천천히 밤이
+            찾아온다. 불빛이 하나둘 켜지며 하루의 끝을 알린다.
           </div>
         </div>
       </main>

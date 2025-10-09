@@ -1,5 +1,6 @@
 import './globals.css';
 import './multilingual.css';
+import MultilingualProvider from './components/MultilingualProvider';
 
 export const metadata = {
   title: 'BIOTOPE',
@@ -47,11 +48,13 @@ export default function RootLayout({ children }) {
           rel="preload"
           href="/font/BallPill-regular.woff"
           as="font"
-          type="font/woff2"
+          type="font/woff"
           crossOrigin="anonymous"
         />
       </head>
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <MultilingualProvider>{children}</MultilingualProvider>
+      </body>
     </html>
   );
 }

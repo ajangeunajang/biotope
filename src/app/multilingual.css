@@ -3,16 +3,18 @@
   font-family: 'Pretendard';
   src: url('/font/PretendardVariable.woff2') format('woff2-variations');
   font-weight: 100 900;
-  font-style: normal;
-  font-display: block;
+  display: block; 
 }
 
 @font-face {
   font-family: 'ballpill';
   src: url('/font/BallPill-regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
+  display: block;
+}
+
+*{  
+  word-break: keep-all;
+  box-sizing: border-box;
 }
 
 body {
@@ -22,12 +24,12 @@ body {
   line-height: 1.5em;
 }
 
-
 /* 영문 텍스트 */
-span.ml-en {
-  font-size: 14px;
+.ml-en, .ml-num, .ml-punct {  
   font-family: 'ballpill', sans-serif;
+  font-size: 0.9em;
   /* baseline shift */
   position: relative;
   top: 0;
 }
+ 
