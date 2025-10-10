@@ -12,7 +12,7 @@
   display: block;
 }
 
-*{  
+* {
   word-break: keep-all;
   box-sizing: border-box;
 }
@@ -20,16 +20,17 @@
 body {
   font-family:'Pretendard', sans-serif;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 1.5em;
+  font-size: 2.3rem;
+  line-height: 1.4em;
 }
 
 /* 영문 텍스트 */
+
 .ml-en, .ml-num, .ml-punct {  
   font-family: 'ballpill', sans-serif;
   font-size: 0.9em;
+
   /* baseline shift */
   position: relative;
   top: 0;
 }
- 
