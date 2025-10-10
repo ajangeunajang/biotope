@@ -19,7 +19,8 @@ const LoadingFallback = () => (
   </div>
 );
 
-export default function Home() {
+// SearchParams를 사용하는 컴포넌트를 별도로 분리
+function HomeContent() {
   const [currentPage, setCurrentPage] = useState('');
   const [preloadedComponents, setPreloadedComponents] = useState(new Set());
   const router = useRouter();
@@ -318,5 +319,13 @@ export default function Home() {
         </header>
       </div>
     </>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <HomeContent />
+    </Suspense>
   );
 }
