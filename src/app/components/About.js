@@ -1,22 +1,24 @@
 export default function About() {
   return (
     <div>
-      <div className="fixed top-0 right-0 w-2/3 h-3/4 bg-black/50 rounded-[100px] m-4 p-8 text-white flex gap-4 items-start">
-        <table className="origin-left scale-x-[0.6]">
-          <tr className="leading-tight">
-            <td className="w-32">w</td>
-            <td className="">biotope-lab.com</td>
-          </tr>
-          <tr className="leading-tight">
-            <td className="w-32">t</td>
-            <td className="">070-4571-9907</td>
-          </tr>
-          <tr className="leading-tight">
-            <td className="w-32">m</td>
-            <td className="">info@biotope-lab.com</td>
-          </tr>
-        </table>
-        <div className="flex-1 overflow-hidden">
+      <div className="fixed top-0 right-0 w-2/3 h-3/4 rounded-[100px] m-4 pl-12 pr-4 py-10 text-white flex items-start overflow-hidden">
+        <div className="flex-1 w-full h-full">
+          <table className="origin-left scale-x-[0.6] w-3/2">
+            <tr className="leading-tight">
+              <td className="min-w-32 align-top">w</td>
+              <td className="">biotope-lab.com</td>
+            </tr>
+            <tr className="leading-tight">
+              <td className="min-w-32 align-top">t</td>
+              <td className="">070-4571-9907</td>
+            </tr>
+            <tr className="leading-tight">
+              <td className="min-w-32 align-top">m</td>
+              <td className="">info@biotope-lab.com</td>
+            </tr>
+          </table>
+        </div>
+        <div className="flex-1 h-full overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <p className="origin-left scale-x-[0.6] w-3/2">
             비오톱에 관하여. 푸른 바다 위로 햇살이 반짝이며 물결이 잔잔하게
             흔들린다. 바람은 부드럽게 스쳐 지나가고, 새들은 자유롭게 하늘을

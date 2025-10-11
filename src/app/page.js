@@ -109,13 +109,25 @@ function HomeContent() {
         <meta name="twitter:description" content={metadata.description} />
       </Head>
       <div>
-        <Image
-          src="/bg.png"
-          alt="background"
-          width={1200}
-          height={1000}
-          className="fixed top-0 left-0 w-full h-full object-cover mix-blend-saturation duration-1000 animate-fade-in"
-        />
+        <div
+          className={`fixed top-0 right-0 overflow-hidden transition-all duration-800 ${
+            currentPage === 'about'
+              ? 'w-2/3 h-3/4 m-4 rounded-[100px] bg-[#C1FF00]'
+              : currentPage === 'lab'
+              ? 'w-full h-full bg-[#A6A6A6]'
+              : 'w-full h-full bg-[#C1FF00]'
+          }`}
+        >
+          <Image
+            src="/bg.png"
+            alt="background"
+            width={1200}
+            height={1000}
+            className={`absolute top-0 right-0 w-screen h-screen object-cover mix-blend-saturation duration-1000 ${
+              currentPage === 'lab' ? 'opacity-0' : ''
+            }`}
+          />
+        </div>
 
         <main className="relative">
           <div
@@ -160,7 +172,9 @@ function HomeContent() {
             )}
           </div>
         </main>
+
         <header className="fixed">
+          {/* logo container */}
           <div className="fixed bottom-0 left-1/2 -translate-x-1/2 p-4">
             <svg
               width="532"
@@ -168,39 +182,44 @@ function HomeContent() {
               viewBox="0 0 532 344"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`max-h-full w-auto transition-opacity duration-600 ${
-                currentPage !== '' ? 'hover:opacity-80 hover:blur-xs' : ''
+              className={`max-h-full w-auto transition-all duration-600 ${
+                currentPage !== ''
+                  ? 'hover:opacity-80 hover:blur-xs hover:invert'
+                  : 'invert'
               }`}
               onClick={() => handlePageChange('')}
             >
               <path
                 d="M501.22 40.52H531.69V5.79H474.48V337.66H531.69V302.93H501.22C491.89 302.93 485.67 283.64 485.67 254.69V227.68C485.67 198.74 491.89 179.44 501.22 179.44H531.69V144.71H501.22C491.14 144.71 484.43 123.87 484.43 92.61C484.43 61.35 491.15 40.51 501.22 40.51M444.01 102.26C444.01 139.31 436.05 164 424.11 164C412.17 164 404.21 139.3 404.21 102.26C404.21 65.22 412.17 40.52 424.11 40.52C436.05 40.52 444.01 65.22 444.01 102.26ZM424.11 198.74C442.77 198.74 455.2 160.15 455.2 102.26C455.2 44.37 442.76 5.79 424.11 5.79H394.26V337.66H405.45V245.04C405.45 217.26 411.42 198.73 420.37 198.73H424.1L424.11 198.74ZM360.68 239.26C360.68 280.94 351.73 308.72 338.29 308.72C324.85 308.72 315.9 280.94 315.9 239.26V104.19C315.9 62.51 324.86 34.73 338.29 34.73C351.72 34.73 360.68 62.51 360.68 104.19V239.25V239.26ZM338.29 0C318.14 0 304.71 41.68 304.71 104.19V239.25C304.71 301.76 318.14 343.44 338.29 343.44C358.44 343.44 371.87 301.76 371.87 239.25V104.19C371.87 41.67 358.44 0 338.29 0ZM297.25 5.79H213.92V40.52H235.06C244.01 40.52 249.98 59.04 249.98 86.83V337.66H261.17V86.83C261.17 59.05 267.14 40.52 276.09 40.52H297.23V5.79H297.25ZM195.26 239.26C195.26 280.94 186.3 308.72 172.87 308.72C159.44 308.72 150.48 280.94 150.48 239.26V104.19C150.48 62.51 159.43 34.73 172.87 34.73C186.31 34.73 195.26 62.51 195.26 104.19V239.25V239.26ZM172.88 0C152.73 0 139.3 41.68 139.3 104.19V239.25C139.3 301.76 152.73 343.44 172.88 343.44C193.03 343.44 206.46 301.76 206.46 239.25V104.19C206.46 41.67 193.03 0 172.88 0ZM116.91 5.79H105.72V337.66H116.91V5.79ZM29.85 302.93C17.91 302.93 9.95 278.23 9.95 241.19C9.95 204.15 17.91 179.45 29.85 179.45H55.97C67.91 179.45 75.87 204.15 75.87 241.19C75.87 278.23 67.91 302.93 55.97 302.93H29.85ZM27.98 36.66C38.8 36.66 46.01 59.04 46.01 92.61C46.01 126.18 38.8 148.57 27.98 148.57C17.16 148.57 9.95 126.19 9.95 92.61C9.95 59.03 17.16 36.66 27.98 36.66ZM55.97 144.71V5.79H0V337.66H55.97C74.63 337.66 87.06 299.07 87.06 241.18C87.06 183.29 74.62 144.71 55.97 144.71Z"
-                fill="white"
+                fill="black"
               />
             </svg>
           </div>
-          <nav className="fixed w-full top-0 left-0 p-4">
+
+          <nav
+            className={`fixed w-auto top-0  p-4 transition-all duration-600 ${
+              currentPage === '' ? 'left-1/2 -translate-x-1/2' : 'left-0'
+            }`}
+          >
             <ul>
-              <li
-                className={`mb-4 h-full transition-all duration-600 ${
-                  currentPage === 'about'
-                    ? 'invert opacity-80'
-                    : ' hover:invert hover:blur-xs'
-                } `}
-                onClick={() => handlePageChange('about')}
-                onMouseEnter={() => handleMouseEnter('about')}
-              >
+              <li className={`mb-4 h-[16vh]`}>
                 <svg
                   width="359"
                   height="141"
                   viewBox="0 0 359 141"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`relative transform transition-all duration-600 ease-in-out ${
+                  className={`h-full w-auto relative transition-all duration-400 ease-in-out ${
+                    currentPage === 'about'
+                      ? 'invert opacity-80'
+                      : ' hover:invert hover:blur-xs'
+                  } ${
                     currentPage === ''
                       ? 'left-1/2 -translate-x-1/2'
                       : 'left-0 -translate-x-0'
                   }`}
+                  onClick={() => handlePageChange('about')}
+                  onMouseEnter={() => handleMouseEnter('about')}
                 >
                   <path
                     d="M358.127 2.36511V16.5565H341.338C334.227 16.5565 329.486 24.1252 329.486 35.4783V137.972H320.598V35.4783C320.598 24.1252 315.858 16.5565 308.747 16.5565H291.958V2.36511H358.127Z"
@@ -224,26 +243,24 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li
-                className={`mb-4 h-full transition-all duration-600 ${
-                  currentPage === 'projects'
-                    ? 'invert opacity-80'
-                    : ' hover:invert hover:blur-xs'
-                } `}
-                onClick={() => handlePageChange('projects')}
-                onMouseEnter={() => handleMouseEnter('projects')}
-              >
+              <li className={`mb-4 h-[16vh]  `}>
                 <svg
                   width="523"
                   height="142"
                   viewBox="0 0 523 142"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`relative transition-all duration-600 delay-100 ease-in-out ${
+                  className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${
                     currentPage === ''
                       ? 'left-1/2 -translate-x-1/2'
                       : 'left-0 -translate-x-0'
+                  } ${
+                    currentPage === 'projects'
+                      ? 'invert opacity-80'
+                      : ' hover:invert hover:blur-xs'
                   }`}
+                  onClick={() => handlePageChange('projects')}
+                  onMouseEnter={() => handleMouseEnter('projects')}
                 >
                   <path
                     d="M497.047 74.0188C483.715 74.0188 474.827 59.8274 474.827 38.5404C474.827 17.2533 483.715 3.06189 497.047 3.06189H522.725V17.2533H497.047C489.048 17.2533 483.715 25.7681 483.715 38.5404C483.715 51.3126 489.048 59.8274 497.047 59.8274H522.725V138.668H478.777V124.477H499.023C508.504 124.477 514.824 114.385 514.824 99.248C514.824 84.1105 508.504 74.0188 499.023 74.0188H497.047Z"
@@ -279,26 +296,24 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li
-                className={`mb-4 h-full transition-all duration-600  ${
-                  currentPage === 'lab'
-                    ? 'invert opacity-80'
-                    : ' hover:invert hover:blur-xs'
-                } `}
-                onClick={() => handlePageChange('lab')}
-                onMouseEnter={() => handleMouseEnter('lab')}
-              >
+              <li className={`mb-4 h-[16vh]  `}>
                 <svg
                   width="203"
                   height="136"
                   viewBox="0 0 203 136"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`relative transition-all duration-600 delay-200 ease-in-out ${
+                  className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${
+                    currentPage === 'lab'
+                      ? 'invert opacity-80'
+                      : ' hover:invert hover:blur-xs'
+                  }  ${
                     currentPage === ''
                       ? 'left-1/2 -translate-x-1/2'
                       : 'left-0 -translate-x-0'
                   }`}
+                  onClick={() => handlePageChange('lab')}
+                  onMouseEnter={() => handleMouseEnter('lab')}
                 >
                   <path
                     d="M178.164 57.159C192.978 57.159 202.854 72.9272 202.854 96.5795C202.854 120.232 192.978 136 178.164 136H133.723V0.393433H178.164V57.159ZM155.944 13.008C147.351 13.008 141.623 22.1536 141.623 35.8719C141.623 49.5902 147.351 58.7358 155.944 58.7358C164.536 58.7358 170.264 49.5902 170.264 35.8719C170.264 22.1536 164.536 13.008 155.944 13.008ZM157.425 121.809H178.164C187.645 121.809 193.966 111.717 193.966 96.5795C193.966 81.442 187.645 71.3504 178.164 71.3504H157.425C147.944 71.3504 141.623 81.442 141.623 96.5795C141.623 111.717 147.944 121.809 157.425 121.809Z"
