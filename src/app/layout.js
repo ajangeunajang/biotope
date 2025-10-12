@@ -11,7 +11,7 @@ export const metadata = {
     siteName: '비오톱',
     images: [
       {
-        // url: '/img/og.png',
+        url: '/biotopeog.png',
         width: 1200,
         height: 630,
         alt: 'BIOTOPE',
@@ -24,7 +24,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'BIOTOPE',
     description: '비오톱',
-    // images: ['/img/og.png'],
+    images: ['/biotopeog.png'],
   },
   robots: {
     index: true,
