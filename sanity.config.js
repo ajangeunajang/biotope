@@ -1,5 +1,6 @@
-import { defineConfig } from 'sanity/build';
+import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
+import { visionTool } from '@sanity/vision';
 
 export default defineConfig({
   name: 'webBiotope',
@@ -8,24 +9,7 @@ export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
 
-  plugins: [
-    structureTool({
-      structure: (S) =>
-        S.list()
-          .title('Content')
-          .items([
-            S.listItem()
-              .title('Projects')
-              .child(
-                S.documentList({
-                  title: 'Projects',
-                  filter: `_type == "project"`,
-                })
-              ),
-            // 다른 콘텐츠 타입들을 추가할 때 여기에 추가하면 됩니다.
-          ]),
-    }),
-  ],
+  plugins: [structureTool(), visionTool()],
 
   schema: {
     types: [
@@ -57,8 +41,8 @@ export default defineConfig({
             },
           },
           {
-            title: 'Technology',
-            name: 'technology',
+            title: 'Keywords',
+            name: 'keywords',
             type: 'array',
             of: [{ type: 'string' }],
             description: '프로젝트에 사용된 기술을 입력하세요.',
@@ -66,12 +50,7 @@ export default defineConfig({
               layout: 'tags',
             },
           },
-          {
-            title: 'Repository',
-            name: 'repository',
-            type: 'url',
-            description: '프로젝트 저장소 주소를 입력하세요.',
-          },
+
           {
             title: 'Demo',
             name: 'demo',
