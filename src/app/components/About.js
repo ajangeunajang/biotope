@@ -45,7 +45,7 @@ export default function About() {
         <div className="flex-1 w-full h-full">
           <table className="origin-left scale-x-[0.6] w-3/2">
             <tbody>
-              {aboutData.contactInfo?.map((contact, index) => (
+              {aboutData.contact?.map((contact, index) => (
                 <tr key={index} className="leading-tight">
                   <td className="min-w-32 align-top">{contact.label}</td>
                   <td className="">{contact.value}</td>
