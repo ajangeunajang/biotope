@@ -114,8 +114,8 @@ function HomeContent() {
             currentPage === 'about'
               ? 'w-2/3 h-3/4 m-4 rounded-[100px] bg-[#C1FF00]'
               : currentPage === 'lab'
-              ? 'w-full h-full bg-[#A6A6A6]'
-              : 'w-full h-full bg-[#C1FF00]'
+                ? 'w-full h-full bg-[#A6A6A6]'
+                : 'w-full h-full bg-[#C1FF00]'
           }`}
         >
           <Image
@@ -175,14 +175,14 @@ function HomeContent() {
 
         <header className="fixed">
           {/* logo container */}
-          <div className="fixed bottom-0 left-1/2 -translate-x-1/2 p-4">
+          <div className="fixed bottom-0 left-1/2 -translate-x-1/2 p-2 lg:p-4">
             <svg
               width="532"
               height="344"
               viewBox="0 0 532 344"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`max-h-full w-auto transition-all duration-600 ${
+              className={`max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${
                 currentPage !== ''
                   ? 'hover:opacity-80 hover:blur-xs hover:invert'
                   : 'invert'
@@ -202,7 +202,7 @@ function HomeContent() {
             }`}
           >
             <ul>
-              <li className={`mb-4 h-[16vh]`}>
+              <li className={`mb-2 lg:mb-4 h-[6vh] lg:h-[16vh]`}>
                 <svg
                   width="359"
                   height="141"
@@ -243,7 +243,7 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li className={`mb-4 h-[16vh]  `}>
+              <li className={`mb-2 lg:mb-4 h-[6vh] lg:h-[16vh]`}>
                 <svg
                   width="523"
                   height="142"
@@ -296,7 +296,7 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li className={`mb-4 h-[16vh]  `}>
+              <li className={`mb-2 lg:mb-4 h-[6vh] lg:h-[16vh]`}>
                 <svg
                   width="203"
                   height="136"

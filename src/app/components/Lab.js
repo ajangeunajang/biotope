@@ -124,7 +124,7 @@ const labData = [
 // 메인 Lab 컴포넌트
 export default function Lab() {
   return (
-    <div className="fixed top-0 right-0 w-2/3 h-full text-center py-4 mx-4 text-white grid grid-cols-2 gap-4 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    <div className="fixed top-0 right-0 w-2/3 h-full text-center py-4 mx-4 text-white grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       {labData.map((lab) => (
         <ProjectCard key={lab.id} project={lab} type="lab" />
       ))}
