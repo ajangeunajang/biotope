@@ -13,7 +13,7 @@ const Lab = lazy(() => import('./components/Lab'));
 const LoadingFallback = () => (
   <div className="fixed top-0 right-0 w-2/3 h-full flex items-center justify-center">
     <div className="text-white text-xl flex items-center gap-2">
-      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+      <div className="w-4 h-4 border-2 border-white border-t-transparent animate-spin"></div>
       <span className="animate-pulse">Loading...</span>
     </div>
   </div>
@@ -81,12 +81,12 @@ function HomeContent() {
       case 'projects':
         return {
           title: 'Projects - BIOTOPE',
-          description: '비오톱의 프로젝트들을 확인해보세요.',
+          description: '비오톱 Projects.',
         };
       case 'lab':
         return {
           title: 'Lab - BIOTOPE',
-          description: '비오톱의 실험실을 둘러보세요.',
+          description: '비오톱 Lab.',
         };
       default:
         return {
@@ -112,7 +112,7 @@ function HomeContent() {
         <div
           className={`fixed top-0 right-0 overflow-hidden transition-all duration-800 ${
             currentPage === 'about'
-              ? 'w-2/3 h-3/4 m-4 rounded-[100px] bg-[#C1FF00]'
+              ? 'w-2/3 h-3/4 m-4 rounded-4xl lg:rounded-[100px] bg-[#C1FF00]'
               : currentPage === 'lab'
                 ? 'w-full h-full bg-[#A6A6A6]'
                 : 'w-full h-full bg-[#C1FF00]'

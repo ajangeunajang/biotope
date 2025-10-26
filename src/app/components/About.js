@@ -25,7 +25,7 @@ export default function About() {
 
   if (loading) {
     return (
-      <div className="fixed top-0 right-0 w-2/3 h-3/4 rounded-[100px] m-4 pl-12 pr-4 py-10 text-white flex items-center justify-center">
+      <div className="fixed top-0 right-0 w-2/3 h-3/4 m-4 pl-12 pr-4 py-10 text-white flex items-center justify-center">
         <div>Loading...</div>
       </div>
     );
@@ -33,7 +33,7 @@ export default function About() {
 
   if (!aboutData) {
     return (
-      <div className="fixed top-0 right-0 w-2/3 h-3/4 rounded-[100px] m-4 pl-12 pr-4 py-10 text-white flex items-center justify-center">
+      <div className="fixed top-0 right-0 w-2/3 h-3/4 m-4 pl-12 pr-4 py-10 text-white flex items-center justify-center">
         <div>About 데이터를 불러올 수 없습니다.</div>
       </div>
     );
@@ -41,21 +41,23 @@ export default function About() {
 
   return (
     <div>
-      <div className="fixed top-0 right-0 w-2/3 h-3/4 rounded-[100px] m-4 pl-12 pr-4 py-10 text-white flex items-start overflow-hidden">
-        <div className="flex-1 w-full h-full">
-          <table className="origin-left scale-x-[0.6] w-3/2">
+      <div className="fixed top-0 right-0 w-2/3 h-3/4 m-4 lg:pl-12 pl-8 pr-4 lg:py-10 py-4 text-white lg:flex items-start overflow-hidden">
+        <div className="flex-1 w-full pb-10 lg:h-full">
+          <table className="origin-left scale-x-[0.6] w-3/2 text-2xl lg:text-[2.5rem]">
             <tbody>
               {aboutData.contact?.map((contact, index) => (
                 <tr key={index} className="leading-tight">
-                  <td className="min-w-32 align-top">{contact.label}</td>
+                  <td className="lg:min-w-32 min-w-20 align-top">
+                    {contact.label}
+                  </td>
                   <td className="">{contact.value}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div className="flex-1 h-full overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          <p className="origin-left scale-x-[0.6] w-3/2">
+        <div className="flex-1 h-full overflow-x-hidden overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <p className="origin-left scale-x-[0.6] w-3/2 text-2xl lg:text-[2.5rem]">
             {aboutData.description}
           </p>
         </div>

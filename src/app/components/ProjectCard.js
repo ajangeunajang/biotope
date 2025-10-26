@@ -10,7 +10,7 @@ export default function ProjectCard({ project, type = 'project' }) {
 
   return (
     <div
-      className="group w-full h-80 transform overflow-hidden rounded-[50px] bg-gray-500 text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer"
+      className="group w-full h-50 lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer"
       style={{ backgroundImage: `url('${project.image}')` }}
       onClick={handleClick}
       role="button"
