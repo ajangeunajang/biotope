@@ -1,17 +1,23 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import { urlFor } from '@/lib/sanity';
 
 export default function ProjectCard({ project, type = 'project' }) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/${type}/${project.slug}`);
+    // Sanity에서 slug를 가져오거나 title 기반으로 생성
+    const slug =
+      project.slug?.current || project.title.toLowerCase().replace(/\s+/g, '');
+    router.push(`/${type}/${slug}`);
   };
 
   return (
     <div
       className="group w-full h-50 lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer"
-      style={{ backgroundImage: `url('${project.image}')` }}
+      style={{
+        backgroundImage: `url('${urlFor(project.thumbnail).width(800).quality(80).url()}')`,
+      }}
       onClick={handleClick}
       role="button"
       tabIndex={0}
@@ -30,9 +36,13 @@ export default function ProjectCard({ project, type = 'project' }) {
           {project.year}
         </div>
         <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
-          {project.keywords.map((keyword, index) => (
-            <span key={index}>{keyword}</span>
-          ))}
+          {project.keywords && project.keywords.length > 0 ? (
+            project.keywords.map((keyword, index) => (
+              <span key={index}>{keyword}</span>
+            ))
+          ) : (
+            <span>준비중</span>
+          )}
         </div>
       </div>
     </div>
