@@ -36,13 +36,11 @@ export default function ProjectCard({ project, type = 'project' }) {
           {project.year}
         </div>
         <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
-          {project.keywords && project.keywords.length > 0 ? (
-            project.keywords.map((keyword, index) => (
-              <span key={index}>{keyword}</span>
-            ))
-          ) : (
-            <span>준비중</span>
-          )}
+          {project.keywords && project.keywords.length > 0
+            ? project.keywords.map((keyword, index) => (
+                <span key={index}>{keyword}</span>
+              ))
+            : null}
         </div>
       </div>
     </div>
