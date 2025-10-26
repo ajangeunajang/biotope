@@ -118,6 +118,24 @@ export default defineConfig({
             description: '프로젝트의 제목을 입력하세요',
             validation: (Rule) => Rule.required(),
           },
+          // Project 스키마에 slug 필드 추가
+          {
+            title: 'Title(En)',
+            name: 'slug',
+            type: 'slug',
+            description: '한글 제목일 경우, 영문 제목을 추가해주세요',
+            options: {
+              source: 'title',
+              slugify: (input) =>
+                input
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')
+                  .replace(/[^\w\-]+/g, '')
+                  .replace(/\-\-+/g, '-')
+                  .replace(/^-+/, '')
+                  .replace(/-+$/, ''),
+            },
+          },
           {
             title: 'Year *',
             name: 'year',
@@ -214,6 +232,23 @@ export default defineConfig({
             type: 'string',
             description: '프로젝트의 제목을 입력하세요',
             validation: (Rule) => Rule.required(),
+          },
+          {
+            title: 'Title(En)',
+            name: 'slug',
+            type: 'slug',
+            description: '한글 제목일 경우, 영문 제목을 추가해주세요',
+            options: {
+              source: 'title',
+              slugify: (input) =>
+                input
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')
+                  .replace(/[^\w\-]+/g, '')
+                  .replace(/\-\-+/g, '-')
+                  .replace(/^-+/, '')
+                  .replace(/-+$/, ''),
+            },
           },
           {
             title: 'Year *',

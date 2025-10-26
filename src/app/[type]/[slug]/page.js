@@ -1,13 +1,14 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, use } from 'react';
 import { fetchDocs } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
 
 function ProjectDetail({ params }) {
   const router = useRouter();
-  const { type, slug } = params;
+  const resolvedParams = use(params);
+  const { type, slug } = resolvedParams;
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -17,13 +18,18 @@ function ProjectDetail({ params }) {
         setLoading(true);
         // Sanity에서 프로젝트 데이터 가져오기
         const projects = await fetchDocs(type);
-        // slug가 title에서 생성된 경우 (예: "Project Title" -> "projecttitle")
-        const normalizedSlug = slug.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+        // URL 디코딩된 slug
+        const decodedSlug = decodeURIComponent(slug);
+
+        // 제목으로 직접 매칭 (slug 필드 지원 + 제목 fallback)
         const foundProject = projects.find((p) => {
-          const normalizedTitle = p.title
-            .toLowerCase()
-            .replace(/[^a-z0-9]/g, '');
-          return normalizedTitle === normalizedSlug;
+          // slug 필드가 있으면 우선 사용
+          if (p.slug?.current && p.slug.current === decodedSlug) {
+            return true;
+          }
+          // slug 필드가 없거나 매칭 실패 시 제목으로 매칭
+          return p.title === decodedSlug;
         });
 
         if (foundProject) {

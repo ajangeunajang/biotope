@@ -6,9 +6,8 @@ export default function ProjectCard({ project, type = 'project' }) {
   const router = useRouter();
 
   const handleClick = () => {
-    // Sanity에서 slug를 가져오거나 title 기반으로 생성
-    const slug =
-      project.slug?.current || project.title.toLowerCase().replace(/\s+/g, '');
+    // URL 안전한 방식으로 slug 생성 - 한글도 지원
+    const slug = project.slug?.current || encodeURIComponent(project.title);
     router.push(`/${type}/${slug}`);
   };
 
