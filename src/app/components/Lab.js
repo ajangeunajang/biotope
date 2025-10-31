@@ -157,7 +157,7 @@ export default function Lab() {
 
   if (!labData || labData.length === 0) {
     return (
-      <div className="fixed top-0 right-0 w-full h-full">
+      <div className="fixed top-0 right-0 w-full h-full overflow-visible">
         <div className="blur-sm sm:blur-xl fixed top-0 right-0 w-2/3 h-auto text-center py-4 pb-[35vh] mx-4 text-white overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <div className="w-full h-auto grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 lg:gap-4 gap-2 ">
             <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
