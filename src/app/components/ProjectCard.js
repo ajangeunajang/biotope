@@ -13,7 +13,7 @@ export default function ProjectCard({ project, type = 'project' }) {
 
   return (
     <div
-      className="group w-full h-50 lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer"
+      className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer"
       style={{
         backgroundImage: `url('${urlFor(project.thumbnail).width(800).quality(80).url()}')`,
       }}
