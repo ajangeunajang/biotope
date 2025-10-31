@@ -36,10 +36,10 @@ export default function MultilingualProvider({ children }) {
               ],
             });
 
-            console.log(
-              'Multilingual 적용 완료 - 요소 수:',
-              textElements.length
-            );
+            // console.log(
+            //   'Multilingual 적용 완료 - 요소 수:',
+            //   textElements.length
+            // );
           };
 
           // 초기 적용

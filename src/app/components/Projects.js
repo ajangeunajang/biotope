@@ -200,7 +200,7 @@ export default function Projects() {
           </div>
         </div>
         <div className="absolute top-0 right-0 w-2/3 h-full text-gray-300 text-base sm:text-2xl text-center items-center justify-center flex">
-          <div>Oh! Biotope Lab Coming Soon </div>
+          <div>Coming Soon </div>
         </div>
       </div>
     );
