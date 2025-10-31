@@ -151,6 +151,177 @@ export default function Projects() {
     );
   }
 
+  if (!projectsData || projectsData.length === 0) {
+    return (
+      <div className="fixed top-0 right-0 w-full h-full">
+        <div className="blur-xl fixed top-0 right-0 w-2/3 h-auto text-center py-4 pb-[35vh] mx-4 text-white overflow-y-scroll overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="w-full h-auto grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 lg:gap-4 gap-2 ">
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            {/* cards */}
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+            <div className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer">
+              <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200">
+                <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  Project Title
+                </h3>
+                <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+                  2025
+                </div>
+                <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
+                  VR Web
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute top-0 right-0 w-2/3 h-full text-gray-300 text-2xl text-center items-center justify-center flex">
+          <div>Oh! Biotope Lab is Under Construction</div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="fixed top-0 right-0 w-2/3 h-full text-center py-4 pb-[35vh] mx-4 text-white overflow-y-scroll overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       <div className="w-full h-auto grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 lg:gap-4 gap-2 ">

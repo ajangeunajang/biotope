@@ -25,7 +25,7 @@ export default function About() {
 
   if (loading) {
     return (
-      <div className="fixed top-0 right-0 w-2/3 h-auto flex items-center justify-center">
+      <div className="fixed top-0 right-0 w-2/3 h-full flex items-center justify-center">
         <div className="text-white text-xl flex items-center gap-2">
           <div className="w-4 h-4 border-2 border-white border-t-transparent animate-spin"></div>
           <span>Loading...</span>
