@@ -37,7 +37,7 @@ export default function About() {
   if (!aboutData) {
     return (
       <div className="fixed top-0 right-0 w-2/3 h-3/4 m-4 pl-12 pr-4 py-10 text-white flex items-center justify-center">
-        <div>About 데이터를 불러올 수 없습니다.</div>
+        <div>Coming Soon</div>
       </div>
     );
   }

@@ -131,10 +131,10 @@ function HomeContent() {
 
         <main className="relative">
           <div
-            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${
+            className={`w-full h-full fixed transition-all duration-1200 ease-in-out ${
               currentPage === 'about'
-                ? 'opacity-100 transform translate-x-0'
-                : 'opacity-0 transform translate-x-full absolute inset-0'
+                ? 'opacity-100 blur-0'
+                : 'opacity-0 blur-2xl'
             }`}
           >
             {currentPage === 'about' && (
