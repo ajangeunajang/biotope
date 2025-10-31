@@ -123,7 +123,7 @@ function HomeContent() {
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-0 right-0 w-screen h-screen object-cover mix-blend-saturation duration-1000 ${
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px]  scale-110 w-screen h-screen object-cover mix-blend-saturation duration-1000 ${
               currentPage === 'lab' ? 'opacity-0' : ''
             }`}
           />
