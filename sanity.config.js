@@ -80,6 +80,7 @@ export default defineConfig({
             validation: (Rule) => Rule.required(),
           },
         ],
+
         preview: {
           select: {
             title: 'contactInfo',
