@@ -46,7 +46,7 @@ export default function About() {
     <div>
       <div className="fixed top-0 right-0 w-2/3 h-3/4 m-4 lg:pl-12 pl-8 pr-4 lg:py-10 py-4 text-white lg:flex items-start overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <div className="flex-1 w-full pb-10 lg:h-full">
-          <table className="origin-left scale-x-[0.6] w-3/2 text-2xl lg:text-[2.5rem]">
+          <table className="origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
             <tbody>
               {aboutData.contact?.map((contact, index) => (
                 <tr key={index} className="leading-tight">
@@ -60,8 +60,11 @@ export default function About() {
           </table>
         </div>
         <div className="flex-1 h-auto pb-10 sm:pb-0 overflow-x-hidden">
-          <p className="origin-left scale-x-[0.6] w-3/2 text-2xl lg:text-[2.5rem]">
-            {aboutData.description}
+          <p className="origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+            {aboutData.descriptionKo}
+          </p>
+          <p className="origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+            {aboutData.descriptionEn}
           </p>
         </div>
       </div>
