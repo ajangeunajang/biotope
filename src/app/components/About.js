@@ -50,7 +50,7 @@ export default function About() {
             <tbody>
               {aboutData.contact?.map((contact, index) => (
                 <tr key={index} className="leading-tight">
-                  <td className="lg:min-w-32 min-w-20 align-top">
+                  <td className="lg:min-w-12 min-w-10 align-top">
                     {contact.label}
                   </td>
                   <td className="">{contact.value}</td>

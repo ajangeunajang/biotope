@@ -205,7 +205,7 @@ function HomeContent() {
             }`}
           >
             <ul>
-              <li className={`mb-2 lg:mb-4 h-[6vh] lg:h-[16vh]`}>
+              <li className={`mb-4 lg:mb-4 h-[4vh] lg:h-[16vh]`}>
                 <svg
                   width="359"
                   height="141"
@@ -246,7 +246,7 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li className={`mb-2 lg:mb-4 h-[6vh] lg:h-[16vh]`}>
+              <li className={`mb-4 lg:mb-4 h-[4vh] lg:h-[16vh]`}>
                 <svg
                   width="523"
                   height="142"
@@ -299,7 +299,7 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li className={`mb-2 lg:mb-4 h-[6vh] lg:h-[16vh]`}>
+              <li className={`mb-4 lg:mb-4 h-[4vh] lg:h-[16vh]`}>
                 <svg
                   width="203"
                   height="136"
