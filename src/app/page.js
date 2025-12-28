@@ -76,22 +76,25 @@ function HomeContent() {
         return {
           title: 'About - BIOTOPE',
           description:
-            '비오톱에 관하여. 푸른 바다 위로 햇살이 반짝이며 물결이 잔잔하게 흔들린다.',
+            '공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오',
         };
       case 'projects':
         return {
           title: 'Projects - BIOTOPE',
-          description: '비오톱 Projects.',
+          description:
+            '공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오',
         };
       case 'lab':
         return {
           title: 'Lab - BIOTOPE',
-          description: '비오톱 Lab.',
+          description:
+            '공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오',
         };
       default:
         return {
           title: 'BIOTOPE',
-          description: '비오톱',
+          description:
+            '공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오',
         };
     }
   };

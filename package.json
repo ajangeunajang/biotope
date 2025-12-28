@@ -13,10 +13,10 @@
     "@sanity/structure": "^2.36.2",
     "@sanity/vision": "^4.10.2",
     "multilingual.js": "^0.1.41",
-    "next": "15.5.4",
+    "next": "^16.1.1",
     "next-sanity": "^11.4.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "sanity": "^4.10.2",
     "styled-components": "^6.1.19"
   },

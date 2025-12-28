@@ -60,12 +60,12 @@ export default function About() {
           </table>
         </div>
         <div className="flex-1 h-auto pb-10 sm:pb-0 overflow-x-hidden">
-          <p className="origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+          <pre className="whitespace-pre-wrap break-words origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
             {aboutData.descriptionKo}
-          </p>
-          <p className="origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+          </pre>
+          <pre className="whitespace-pre-wrap break-words origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl mt-6">
             {aboutData.descriptionEn}
-          </p>
+          </pre>
         </div>
       </div>
     </div>
