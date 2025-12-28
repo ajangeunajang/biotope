@@ -43,14 +43,13 @@ export default function About() {
   }
 
   return (
-    <div>
       <div className="fixed top-0 right-0 w-2/3 h-3/4 m-4 lg:pl-12 pl-8 pr-4 lg:py-10 py-4 text-white lg:flex items-start overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <div className="flex-1 w-full pb-10 lg:h-full">
-          <table className="origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+          <table className="lg:fixed origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
             <tbody>
               {aboutData.contact?.map((contact, index) => (
-                <tr key={index} className="leading-tight">
-                  <td className="lg:min-w-12 min-w-10 align-top">
+                <tr key={index} className="leading-tight overflow-x-hidden">
+                  <td className="w-12 lg:pr-32 pr-20 align-top">
                     {contact.label}
                   </td>
                   <td className="">{contact.value}</td>
@@ -60,14 +59,13 @@ export default function About() {
           </table>
         </div>
         <div className="flex-1 h-auto pb-10 sm:pb-0 overflow-x-hidden">
-          <pre className="whitespace-pre-wrap break-words origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+          <pre className="whitespace-pre-wrap break-words origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl mb-20">
             {aboutData.descriptionKo}
           </pre>
-          <pre className="whitespace-pre-wrap break-words origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl mt-6">
+          <pre className="whitespace-pre-wrap break-words origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl mb-20">
             {aboutData.descriptionEn}
           </pre>
         </div>
       </div>
-    </div>
   );
 }

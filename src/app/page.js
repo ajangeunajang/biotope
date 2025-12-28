@@ -23,6 +23,7 @@ const LoadingFallback = () => (
 function HomeContent() {
   const [currentPage, setCurrentPage] = useState('');
   const [preloadedComponents, setPreloadedComponents] = useState(new Set());
+  const [isNightMode, setIsNightMode] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -113,32 +114,28 @@ function HomeContent() {
       </Head>
       <div>
         <div
-          className={`fixed top-0 right-0 overflow-hidden transition-all duration-800 ${
-            currentPage === 'about'
-              ? 'w-2/3 h-3/4 m-4 rounded-4xl lg:rounded-[100px] bg-[#C1FF00]'
+          className={`fixed top-0 right-0 overflow-hidden transition-all duration-800 ${currentPage === 'about'
+              ? `w-2/3 h-3/4 m-4 rounded-4xl lg:rounded-[100px] bg-[#C1FF00]`
               : currentPage === 'lab'
                 ? 'w-full h-full bg-[#A6A6A6]'
                 : 'w-full h-full bg-[#C1FF00]'
-          }`}
+            }`}
         >
           <Image
             src="/bg.png"
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120  w-screen h-screen object-cover object-right-top mix-blend-saturation duration-1000 ${
-              currentPage === 'lab' ? 'opacity-0' : ''
-            }`}
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120  w-screen h-screen object-cover object-right-top filter ${isNightMode ? ' mix-blend-difference blur-sm brightness-80' : ' mix-blend-saturation'} duration-1000 ${currentPage === 'lab' ? 'opacity-0' : ''
+              }`}
           />
         </div>
-
         <main className="relative">
           <div
-            className={`w-full h-full fixed transition-all duration-1200 ease-in-out ${
-              currentPage === 'about'
+            className={`w-full h-full fixed transition-all duration-1200 ease-in-out ${currentPage === 'about'
                 ? 'opacity-100 blur-0'
                 : 'opacity-0 blur-2xl'
-            }`}
+              }`}
           >
             {currentPage === 'about' && (
               <Suspense fallback={<LoadingFallback />}>
@@ -148,11 +145,10 @@ function HomeContent() {
           </div>
 
           <div
-            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${
-              currentPage === 'projects'
+            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${currentPage === 'projects'
                 ? 'opacity-100 transform translate-x-0'
                 : 'opacity-0 transform translate-x-full absolute inset-0'
-            }`}
+              }`}
           >
             {currentPage === 'projects' && (
               <Suspense fallback={<LoadingFallback />}>
@@ -162,11 +158,10 @@ function HomeContent() {
           </div>
 
           <div
-            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${
-              currentPage === 'lab'
+            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${currentPage === 'lab'
                 ? 'opacity-100 transform translate-x-0'
                 : 'opacity-0 transform translate-x-full absolute inset-0'
-            }`}
+              }`}
           >
             {currentPage === 'lab' && (
               <Suspense fallback={<LoadingFallback />}>
@@ -175,6 +170,21 @@ function HomeContent() {
             )}
           </div>
         </main>
+
+        {/* Night mode toggle button - only visible on about page */}
+        {(currentPage !== 'lab') && (
+          <button
+            onClick={() => setIsNightMode(!isNightMode)}
+            className={`fixed z-100 top-[calc(12vh+4.5rem)] rotate-180 lg:rotate-0 left-2 scale-60 lg:bottom-4 lg:left-4 lg:top-auto lg:scale-100 z-50 w-12 h-12 hover:rotate-330 transform transition-all duration-300 flex items-center justify-center ${isNightMode ? 'invert' : ''}`}
+            aria-label="Toggle night mode"
+          >
+            
+              <svg width="126" height="115" viewBox="0 0 126 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M82.5065 78.7347L104.672 109.104L97.0444 115.034L74.639 84.6647C71.6972 80.4829 67.0109 78.0149 62.8035 78.0149C58.5961 78.0149 53.944 80.4829 50.968 84.6647L28.5626 115.034L20.9345 109.104L43.3399 78.7347C45.3239 75.7869 46.7948 72.085 46.7948 68.8629C46.7948 63.687 42.3479 58.9911 35.9512 56.5231L0 44.6632L3.45487 35.2712L39.4061 47.1312C50.4891 50.8331 57.8777 45.4173 57.8777 33.3174V0H67.7292V33.3174C67.7292 45.4173 75.1179 50.8331 86.2009 47.1312L122.152 35.2712L125.607 44.6632L89.8952 56.5231C83.2591 58.9911 78.8122 63.687 78.8122 68.8629C78.8122 72.085 80.2831 75.7869 82.5065 78.7347Z" fill="black" />
+              </svg>
+ 
+          </button>
+        )}
 
         <header className="fixed">
           {/* logo container */}
@@ -185,11 +195,10 @@ function HomeContent() {
               viewBox="0 0 532 344"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${
-                currentPage !== ''
-                  ? 'hover:opacity-80 hover:blur-xs hover:invert'
-                  : 'invert'
-              }`}
+              className={`max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${currentPage !== ''
+                  ? 'hover:blur-md hover:invert'
+                  : 'invert blur-xs'
+                }`}
               onClick={() => handlePageChange('')}
             >
               <path
@@ -200,9 +209,8 @@ function HomeContent() {
           </div>
 
           <nav
-            className={`fixed w-auto top-0  p-4 transition-all duration-600 ${
-              currentPage === '' ? 'left-1/2 -translate-x-1/2' : 'left-0'
-            }`}
+            className={`fixed w-auto top-2 lg:top-0 p-4 transition-all duration-600 ${currentPage === '' ? 'left-1/2 -translate-x-1/2' : 'left-0'
+              }`}
           >
             <ul>
               <li className={`mb-4 lg:mb-4 h-[4vh] lg:h-[16vh]`}>
@@ -212,15 +220,13 @@ function HomeContent() {
                   viewBox="0 0 359 141"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`h-full w-auto relative transition-all duration-400 ease-in-out ${
-                    currentPage === 'about'
-                      ? 'invert opacity-80'
+                  className={`h-full w-auto relative transition-all duration-400 ease-in-out ${currentPage === 'about'
+                      ? 'invert blur-xs'
                       : ' hover:invert hover:blur-xs'
-                  } ${
-                    currentPage === ''
+                    } ${currentPage === ''
                       ? 'left-1/2 -translate-x-1/2'
                       : 'left-0 -translate-x-0'
-                  }`}
+                    }`}
                   onClick={() => handlePageChange('about')}
                   onMouseEnter={() => handleMouseEnter('about')}
                 >
@@ -253,15 +259,13 @@ function HomeContent() {
                   viewBox="0 0 523 142"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${
-                    currentPage === ''
+                  className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${currentPage === ''
                       ? 'left-1/2 -translate-x-1/2'
                       : 'left-0 -translate-x-0'
-                  } ${
-                    currentPage === 'projects'
-                      ? 'invert opacity-80'
+                    } ${currentPage === 'projects'
+                      ? 'invert blur-xs'
                       : ' hover:invert hover:blur-xs'
-                  }`}
+                    }`}
                   onClick={() => handlePageChange('projects')}
                   onMouseEnter={() => handleMouseEnter('projects')}
                 >
@@ -306,15 +310,13 @@ function HomeContent() {
                   viewBox="0 0 203 136"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${
-                    currentPage === 'lab'
-                      ? 'invert opacity-80'
+                  className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${currentPage === 'lab'
+                      ? 'invert blur-xs'
                       : ' hover:invert hover:blur-xs'
-                  }  ${
-                    currentPage === ''
+                    }  ${currentPage === ''
                       ? 'left-1/2 -translate-x-1/2'
                       : 'left-0 -translate-x-0'
-                  }`}
+                    }`}
                   onClick={() => handlePageChange('lab')}
                   onMouseEnter={() => handleMouseEnter('lab')}
                 >
