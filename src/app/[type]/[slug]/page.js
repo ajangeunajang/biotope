@@ -69,9 +69,15 @@ function ProjectDetail({ params }) {
           onClick={() => router.push('/')}
           className="text-xl hover:opacity-70 transition-opacity"
         >
-          ← Back
+          <svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.92 0H61.92V3.6H21.67C17.78 3.6 15.19 6.18999 15.19 10.08C15.19 11.66 15.98 13.39 17.13 14.54L78.48 75.96L75.96 78.48L14.54 17.06C13.46 15.98 11.66 15.19 10.08 15.19C6.19 15.19 3.60001 17.78 3.60001 21.67V61.92H0V16.92L16.92 0Z" fill="black" />
+          </svg>
+
         </button>
         <div className="text-right">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+            {project.title}
+          </h1>
           <p className="text-sm">{project.year}</p>
           <p className="text-sm">{project.client || 'Personal Project'}</p>
         </div>

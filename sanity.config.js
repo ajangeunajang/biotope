@@ -126,7 +126,7 @@ export default defineConfig({
             description: '프로젝트의 제목을 입력하세요',
             validation: (Rule) => Rule.required(),
           },
-          // Project 스키마에 slug 필드 추가
+          // url 생성 - Project 스키마에 slug 필드 필요
           {
             title: 'Title(En)',
             name: 'slug',
@@ -157,7 +157,17 @@ export default defineConfig({
             name: 'keywords',
             type: 'array',
             of: [{ type: 'string' }],
-            description: 'ex) Interactive, AI, VR/AR, Web',
+            description: 'ex) VR/AR, Web, Kiosk',
+            options: {
+              layout: 'tags',
+            },
+          },
+          {
+            title: 'Scope *',
+            name: 'scope',
+            type: 'array',
+            of: [{ type: 'string' }],
+            description: 'ex) Programming, Design, Research, Editing',
             options: {
               layout: 'tags',
             },
@@ -276,6 +286,7 @@ export default defineConfig({
               layout: 'tags',
             },
           },
+
           {
             title: 'Description *',
             name: 'description',
