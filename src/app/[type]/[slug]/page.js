@@ -68,22 +68,26 @@ function ProjectDetail({ params }) {
 
   return (
     <div className="max-h-screen bg-[#C1FF00] text-black">
+
       {/* Header - Fixed */}
       <header className="fixed top-0 left-0 w-1/4 h-full z-50 p-4 lg:p-8 flex flex-col justify-between items-start">
-        <div className="flex flex-col gap-4 text-sm origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
-          <h1 className="text-4xl lg:text-6xl mb-6">
+        <div className="flex flex-col text-sm origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+          <h1 className="text-4xl lg:text-6xl">
             {project.title}
           </h1>
+          <h2 className="text-3xl lg:text-4xl my-2">
+            {project.host}
+          </h2>
           <p className="">{project.year}</p>
 
           {/* Keywords */}
           {project.keywords && project.keywords.length > 0 && (
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 ">
               {project.keywords.map((keyword, index) => (
                 <span
                   key={index}
-                  className="mr-8"
+                  className="mr-6"
                 >
                   {keyword}
                 </span>
@@ -91,12 +95,37 @@ function ProjectDetail({ params }) {
             </div>
 
           )}
-          <pre className="whitespace-pre-wrap break-words ">{project.description}</pre>
-          <p className="">{project.client || 'Personal Project'}</p>
+          <pre className="whitespace-pre-wrap break-words text-base sm:text-xl mt-20">
+            {project.description}
+          </pre>
+
+          {/* Info Details */}
+          <div className="text-base sm:text-xl mt-20">
+            {project.scope && project.scope.length > 0 && (
+              <p className="flex gap-8">
+                <div>Scope</div>
+                <div>
+                  {project.scope.map((scopeItem, index) => (
+                    <div
+                      key={index}
+                      className=""
+                    >
+                      {scopeItem}
+                    </div>
+                  ))}</div>
+              </p>
+            )}
+            <p className="flex gap-8">
+              {project.client && project.client.length > 0 && (
+                <div>Client</div>
+              )}
+              <div>{project.client || 'Personal Project'}</div>
+            </p></div>
         </div>
-         <button
+
+        <button
           onClick={() => router.back()}
-          className="text-xl hover:opacity-70 transition-all hover:-rotate-90 transform duration-300"
+          className="hover:invert transition-all hover:-rotate-90 transform duration-300"
         >
           <svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.92 0H61.92V3.6H21.67C17.78 3.6 15.19 6.18999 15.19 10.08C15.19 11.66 15.98 13.39 17.13 14.54L78.48 75.96L75.96 78.48L14.54 17.06C13.46 15.98 11.66 15.19 10.08 15.19C6.19 15.19 3.60001 17.78 3.60001 21.67V61.92H0V16.92L16.92 0Z" fill="black" />
