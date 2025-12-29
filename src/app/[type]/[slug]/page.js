@@ -72,13 +72,13 @@ function ProjectDetail({ params }) {
       {/* Header - Fixed */}
       <header className="fixed top-0 left-0 w-1/4 h-full z-50 p-4 lg:p-8 flex flex-col justify-between items-start">
         <div className="flex flex-col text-sm origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
-          <h1 className="text-4xl lg:text-6xl text-[#C1FF00]">
+          <h1 className="text-4xl lg:text-6xl">
             {project.title}
           </h1>
-          <h2 className="text-4xl lg:text-5xl mt-2 text-white">
+          <h2 className="text-4xl lg:text-5xl mt-2">
             {project.host}
           </h2>
-          <p className="mt-6 text-white">{project.year}</p>
+          <p className="mt-6 text-[#C1FF00]">{project.year}</p>
           {/* Keywords */}
           {project.keywords && project.keywords.length > 0 && (
             <div className="flex flex-wrap gap-3 text-base sm:text-xl mt-2">
@@ -99,7 +99,7 @@ function ProjectDetail({ params }) {
           </pre>
 
           {/* Info Details */}
-          <div className="text-base sm:text-xl mt-40 flex flex-col gap-2">
+          <div className="text-base sm:text-xl mt-40 flex flex-col gap-2 text-[#C1FF00]">
             {project.scope && project.scope.length > 0 && (
               <div className="flex gap-2">
                 <div className='border-t w-30'>Scope</div>
