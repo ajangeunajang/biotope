@@ -69,41 +69,59 @@ function ProjectDetail({ params }) {
   return (
     <div className="h-screen bg-black text-white">
 
-      {/* Header - Fixed */}
-      <header className="fixed top-0 left-0 w-1/4 h-full z-50 p-4 lg:p-8 flex flex-col justify-between items-start">
-        <div className="flex flex-col text-sm origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
-          <h1 className="text-4xl lg:text-6xl">
-            {project.title}
-          </h1>
-          <h2 className="text-4xl lg:text-5xl mt-2">
-            {project.host}
-          </h2>
-          <p className="mt-6 text-[#C1FF00]">{project.year}</p>
-          {/* Keywords */}
-          {project.keywords && project.keywords.length > 0 && (
-            <div className="flex flex-wrap gap-3 text-base sm:text-xl mt-2">
-              {project.keywords.map((keyword, index) => (
-                <span
-                  key={index}
-                  className="bg-[#C1FF00] text-black px-2"
-                >
-                  {keyword}
-                </span>
-              ))}
-            </div>
-          )}
-          
+      {/* Fixed */}
+      <article className="fixed top-0 left-0  w-1/4 h-full z-50 p-4 lg:p-8 flex flex-col gap-20 justify-start items-start">
+        {/* back ui */}
+        <button
+          onClick={() => router.back()}
+          className="hover:brightness-300 hover:saturate-0 transition-all hover:-rotate-90 transform duration-300"
+        >
+          <svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.92 0H61.92V3.6H21.67C17.78 3.6 15.19 6.18999 15.19 10.08C15.19 11.66 15.98 13.39 17.13 14.54L78.48 75.96L75.96 78.48L14.54 17.06C13.46 15.98 11.66 15.19 10.08 15.19C6.19 15.19 3.60001 17.78 3.60001 21.67V61.92H0V16.92L16.92 0Z" fill="#C1FF00" />
+          </svg>
+        </button>
 
-          <pre className="whitespace-pre-wrap break-words text-2xl lg:text-3xl leading-tight mt-20">
-            {project.description}
-          </pre>
+        {/* Title */}
+        <div className="flex-1 overflow-hidden flex flex-col justify-between origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+          <main>
+            <h1 className="text-4xl lg:text-6xl">
+              {project.title}
+            </h1>
+            <h2 className="text-4xl lg:text-5xl mt-2">
+              {project.host}
+            </h2>
+
+            <p className="mt-6 text-[#C1FF00]">{project.year}</p>
+            {/* Keywords */}
+            {project.keywords && project.keywords.length > 0 && (
+              <div className="flex flex-wrap gap-3 text-base sm:text-xl mt-2">
+                {project.keywords.map((keyword, index) => (
+                  <span
+                    key={index}
+                    className="bg-[#C1FF00] text-black px-2"
+                  >
+                    {keyword}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Description */}
+            <div className='overflow-hidden relative'>
+              <pre className="h-full overflow-scroll whitespace-pre-wrap break-words text-2xl lg:text-3xl leading-tight pt-20 pb-30">
+                {project.description}
+              </pre>
+              <div className="absolute top-0 right-0 w-full h-20 bg-gradient-to-b from-black via-black via-black/50 to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-0 right-0 w-full h-30 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
+            </div>
+          </main>
 
           {/* Info Details */}
-          <div className="text-base sm:text-xl mt-40 flex flex-col gap-2 text-[#C1FF00]">
+          <div className="text-base sm:text-xl flex flex-col gap-2 text-[#C1FF00] ">
             {project.scope && project.scope.length > 0 && (
               <div className="flex gap-2">
-                <div className='border-t w-30'>Scope</div>
-                <div className='border-t min-w-[20rem]'>
+                <div className='border-t w-40'>Scope</div>
+                <div className='border-t min-w-[30rem]'>
                   {project.scope.map((scopeItem, index) => (
                     <div
                       key={index}
@@ -115,23 +133,16 @@ function ProjectDetail({ params }) {
               </div>
             )}
             <div className="flex gap-2">
-                <div className='border-t w-30'>Client</div>          
-              <div className='border-t min-w-[20rem]'>
+              <div className='border-t w-40'>Client</div>
+              <div className='border-t min-w-[30rem]'>
                 {project.client || 'Personal Project'}
               </div>
             </div>
           </div>
         </div>
 
-        <button
-          onClick={() => router.back()}
-          className="hover:invert transition-all hover:-rotate-90 transform duration-300"
-        >
-          <svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16.92 0H61.92V3.6H21.67C17.78 3.6 15.19 6.18999 15.19 10.08C15.19 11.66 15.98 13.39 17.13 14.54L78.48 75.96L75.96 78.48L14.54 17.06C13.46 15.98 11.66 15.19 10.08 15.19C6.19 15.19 3.60001 17.78 3.60001 21.67V61.92H0V16.92L16.92 0Z" fill="#C1FF00" />
-          </svg>
-        </button>
-      </header>
+
+      </article>
 
       {/* Gallery */}
       <main className="fixed top-0 right-0 w-3/4 h-full p-8">
