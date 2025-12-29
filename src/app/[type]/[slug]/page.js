@@ -55,7 +55,7 @@ function ProjectDetail({ params }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#C1FF00]">
+      <div className="min-h-screen flex items-center justify-center bg-black text-white">
         <div className="text-xl flex items-center gap-2">
           <div className="w-4 h-4 border-2 border-black border-t-transparent animate-spin"></div>
           <span>Loading...</span>
@@ -67,25 +67,25 @@ function ProjectDetail({ params }) {
   if (!project) return null;
 
   return (
-    <div className="max-h-screen bg-[#C1FF00] text-black">
+    <div className="h-screen bg-black text-white">
 
       {/* Header - Fixed */}
       <header className="fixed top-0 left-0 w-1/4 h-full z-50 p-4 lg:p-8 flex flex-col justify-between items-start">
         <div className="flex flex-col text-sm origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
-          <h1 className="text-4xl lg:text-6xl">
+          <h1 className="text-4xl lg:text-6xl text-[#C1FF00]">
             {project.title}
           </h1>
-          <h2 className="text-4xl lg:text-5xl mt-2">
+          <h2 className="text-4xl lg:text-5xl mt-2 text-white">
             {project.host}
           </h2>
-          <p className="mt-2">{project.year}</p>
+          <p className="mt-6 text-white">{project.year}</p>
           {/* Keywords */}
           {project.keywords && project.keywords.length > 0 && (
             <div className="flex flex-wrap gap-3 text-base sm:text-xl mt-2">
               {project.keywords.map((keyword, index) => (
                 <span
                   key={index}
-                  className="bg-black text-[#C1FF00] px-2"
+                  className="bg-[#C1FF00] text-black px-2"
                 >
                   {keyword}
                 </span>
@@ -99,7 +99,7 @@ function ProjectDetail({ params }) {
           </pre>
 
           {/* Info Details */}
-          <div className="text-base sm:text-xl mt-20 flex flex-col gap-2">
+          <div className="text-base sm:text-xl mt-40 flex flex-col gap-2">
             {project.scope && project.scope.length > 0 && (
               <div className="flex gap-2">
                 <div className='border-t w-30'>Scope</div>
@@ -128,7 +128,7 @@ function ProjectDetail({ params }) {
           className="hover:invert transition-all hover:-rotate-90 transform duration-300"
         >
           <svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16.92 0H61.92V3.6H21.67C17.78 3.6 15.19 6.18999 15.19 10.08C15.19 11.66 15.98 13.39 17.13 14.54L78.48 75.96L75.96 78.48L14.54 17.06C13.46 15.98 11.66 15.19 10.08 15.19C6.19 15.19 3.60001 17.78 3.60001 21.67V61.92H0V16.92L16.92 0Z" fill="black" />
+            <path d="M16.92 0H61.92V3.6H21.67C17.78 3.6 15.19 6.18999 15.19 10.08C15.19 11.66 15.98 13.39 17.13 14.54L78.48 75.96L75.96 78.48L14.54 17.06C13.46 15.98 11.66 15.19 10.08 15.19C6.19 15.19 3.60001 17.78 3.60001 21.67V61.92H0V16.92L16.92 0Z" fill="#C1FF00" />
           </svg>
         </button>
       </header>
@@ -136,7 +136,7 @@ function ProjectDetail({ params }) {
       {/* Gallery */}
       <main className="fixed top-0 right-0 w-3/4 h-full p-8">
         {project.images && project.images.length > 0 && (
-          <section className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-black">
+          <section className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-gray-700">
             <Swiper
               modules={[Navigation, Pagination]}
               spaceBetween={30}
@@ -147,7 +147,7 @@ function ProjectDetail({ params }) {
             >
               {project.images.map((image, index) => (
                 <SwiperSlide key={index}>
-                  <div className="relative w-full h-full flex items-center justify-center rounded-4xl lg:rounded-[100px] overflow-hidden bg-black">
+                  <div className="relative w-full h-full flex items-center justify-center rounded-4xl lg:rounded-[100px] overflow-hidden">
                     <Image
                       src={urlFor(image).width(1200).quality(90).url()}
                       alt={`${project.title} - 이미지 ${index + 1}`}
@@ -184,7 +184,7 @@ export default function Page({ params }) {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#C1FF00]">
+        <div className="min-h-screen flex items-center justify-center bg-black text-white">
           <div className="text-xl flex items-center gap-2">
             <div className="w-4 h-4 border-2 border-black border-t-transparent animate-spin"></div>
             <span>Loading...</span>
