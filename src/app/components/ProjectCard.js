@@ -31,9 +31,9 @@ export default function ProjectCard({ project, type = 'project' }) {
         <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300 mt-1">
           {project.title}
         </h3>
-        <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
+        {/* <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
           {project.year}
-        </div>
+        </div> */}
         <div className="scale-x-[0.6] flex gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
           {project.keywords && project.keywords.length > 0
             ? project.keywords.map((keyword, index) => (

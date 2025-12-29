@@ -126,6 +126,13 @@ export default defineConfig({
             description: '프로젝트의 제목을 입력하세요',
             validation: (Rule) => Rule.required(),
           },
+          {
+            title: 'Host *',
+            name: 'host',
+            type: 'string',
+            description: '주최를 입력하세요',
+            validation: (Rule) => Rule.required(),
+          },
           // url 생성 - Project 스키마에 slug 필드 필요
           {
             title: 'Title(En)',
