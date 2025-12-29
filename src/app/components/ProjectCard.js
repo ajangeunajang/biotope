@@ -11,11 +11,27 @@ export default function ProjectCard({ project, type = 'project' }) {
     router.push(`/${type}/${slug}`);
   };
 
+  // 썸네일이 없을 때 랜덤 이미지 선택 (프로젝트별로 일관성 유지)
+  const getRandomThumb = (projectTitle) => {
+    // 프로젝트 제목을 기반으로 간단한 해시 생성
+    let hash = 0;
+    for (let i = 0; i < projectTitle.length; i++) {
+      hash = projectTitle.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    // 1~5 사이의 숫자로 변환
+    const imageNumber = (Math.abs(hash) % 5) + 1;
+    return `/thumb/${imageNumber}.webp`;
+  };
+
+  const thumbnailUrl = project.thumbnail
+    ? urlFor(project.thumbnail).width(800).quality(80).url()
+    : getRandomThumb(project.title);
+
   return (
     <div
       className="group w-full h-[40vw] lg:h-80 transform overflow-hidden lg:rounded-[50px] rounded-4xl bg-gray-500 text-base sm:text-xl bg-cover bg-center relative brightness-90 hover:brightness-100 cursor-pointer"
       style={{
-        backgroundImage: `url('${urlFor(project.thumbnail).width(800).quality(80).url()}')`,
+        backgroundImage: `url('${thumbnailUrl}')`,
       }}
       onClick={handleClick}
       role="button"

@@ -153,9 +153,9 @@ function ProjectDetail({ params }) {
               modules={[Navigation, Pagination]}
               spaceBetween={30}
               slidesPerView={1}
-              navigation
               pagination={{ clickable: true }}
               className="w-full h-full"
+              style={{ isolation: 'auto' }}
             >
               {project.images.map((image, index) => (
                 <SwiperSlide key={index}>

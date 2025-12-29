@@ -104,7 +104,7 @@ export default defineConfig({
         type: 'document',
         fields: [
           {
-            title: 'Thumbnail *',
+            title: 'Thumbnail',
             name: 'thumbnail',
             type: 'image',
             description: '대표 이미지를 업로드하세요 (150KB 이하)',
@@ -112,8 +112,8 @@ export default defineConfig({
               hotspot: true,
             },
             validation: (Rule) =>
-              Rule.required('썸네일 이미지는 필수입니다.').custom((image) => {
-                if (image.asset && image.asset.size > 150000) {
+              Rule.custom((image) => {
+                if (image && image.asset && image.asset.size > 150000) {
                   return '이미지 크기는 150KB 이하여야 합니다.';
                 }
                 return true;
@@ -236,7 +236,7 @@ export default defineConfig({
         type: 'document',
         fields: [
           {
-            title: 'Thumbnail *',
+            title: 'Thumbnail',
             name: 'thumbnail',
             type: 'image',
             description: '대표 이미지를 업로드하세요 (150KB 이하)',
@@ -244,8 +244,8 @@ export default defineConfig({
               hotspot: true,
             },
             validation: (Rule) =>
-              Rule.required('썸네일 이미지는 필수입니다.').custom((image) => {
-                if (image.asset && image.asset.size > 150000) {
+              Rule.custom((image) => {
+                if (image && image.asset && image.asset.size > 150000) {
                   return '이미지 크기는 150KB 이하여야 합니다.';
                 }
                 return true;
