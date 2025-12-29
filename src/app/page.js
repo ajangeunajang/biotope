@@ -121,12 +121,22 @@ function HomeContent() {
                 : 'w-full h-full bg-[#C1FF00]'
             }`}
         >
+          {/* Light mode image layer */}
           <Image
             src="/bg.png"
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120  w-screen h-screen object-cover object-right-top filter ${isNightMode ? ' mix-blend-difference blur-sm brightness-80' : ' mix-blend-saturation'} duration-1000 ${currentPage === 'lab' ? 'opacity-0' : ''
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top mix-blend-saturation transition-opacity duration-[1500ms] ease-in-out ${currentPage === 'lab' ? 'opacity-0' : isNightMode ? 'opacity-0' : 'opacity-100'
+              }`}
+          />
+          {/* Night mode image layer */}
+          <Image
+            src="/bg.png"
+            alt="background"
+            width={1200}
+            height={1000}
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top mix-blend-difference blur-sm brightness-80 transition-opacity duration-[1500ms] ease-in-out ${currentPage === 'lab' ? 'opacity-0' : isNightMode ? 'opacity-100' : 'opacity-0'
               }`}
           />
         </div>
