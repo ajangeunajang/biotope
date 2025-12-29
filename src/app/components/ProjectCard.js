@@ -28,7 +28,10 @@ export default function ProjectCard({ project, type = 'project' }) {
       }}
     >
       <div className="absolute w-full h-full bg-black/50 group-hover:bg-black/0 transition-bg duration-200 leading-tight">
-        <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300 mt-1">
+      <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300 mt-1">
+          {project.host}
+        </h3>
+        <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
           {project.title}
         </h3>
         {/* <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
