@@ -75,36 +75,35 @@ function ProjectDetail({ params }) {
           <h1 className="text-4xl lg:text-6xl">
             {project.title}
           </h1>
-          <h2 className="text-3xl lg:text-4xl my-2">
+          <h2 className="text-4xl lg:text-5xl mt-2">
             {project.host}
           </h2>
-          <p className="">{project.year}</p>
-
+          <p className="mt-2">{project.year}</p>
           {/* Keywords */}
           {project.keywords && project.keywords.length > 0 && (
-
-            <div className="flex flex-wrap gap-2 ">
+            <div className="flex flex-wrap gap-3 text-base sm:text-xl mt-2">
               {project.keywords.map((keyword, index) => (
                 <span
                   key={index}
-                  className="mr-6"
+                  className="bg-black text-[#C1FF00] px-2"
                 >
                   {keyword}
                 </span>
               ))}
             </div>
-
           )}
-          <pre className="whitespace-pre-wrap break-words text-base sm:text-xl mt-20">
+          
+
+          <pre className="whitespace-pre-wrap break-words text-2xl lg:text-3xl leading-tight mt-20">
             {project.description}
           </pre>
 
           {/* Info Details */}
-          <div className="text-base sm:text-xl mt-20">
+          <div className="text-base sm:text-xl mt-20 flex flex-col gap-2">
             {project.scope && project.scope.length > 0 && (
-              <p className="flex gap-8">
-                <div>Scope</div>
-                <div>
+              <div className="flex gap-2">
+                <div className='border-t w-30'>Scope</div>
+                <div className='border-t min-w-[20rem]'>
                   {project.scope.map((scopeItem, index) => (
                     <div
                       key={index}
@@ -113,14 +112,15 @@ function ProjectDetail({ params }) {
                       {scopeItem}
                     </div>
                   ))}</div>
-              </p>
+              </div>
             )}
-            <p className="flex gap-8">
-              {project.client && project.client.length > 0 && (
-                <div>Client</div>
-              )}
-              <div>{project.client || 'Personal Project'}</div>
-            </p></div>
+            <div className="flex gap-2">
+                <div className='border-t w-30'>Client</div>          
+              <div className='border-t min-w-[20rem]'>
+                {project.client || 'Personal Project'}
+              </div>
+            </div>
+          </div>
         </div>
 
         <button
