@@ -24,10 +24,18 @@ body {
   line-height: 1.4em;
 }
 
+pre {
+  font-family:'Pretendard', sans-serif;
+  font-weight: 600;
+}
+
 /* 영문 텍스트 */
+pre .ml-en, pre .ml-num, pre .ml-punct {  
+  font-family: 'ballpill', sans-serif;
+}
 
 .ml-en, .ml-num, .ml-punct {  
-  font-family: 'ballpill', sans-serif;
+  font-family: 'ballpill', sans-serif !important;
   font-size: 0.9em;
 
   /* baseline shift */

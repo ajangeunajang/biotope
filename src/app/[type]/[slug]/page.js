@@ -4,6 +4,11 @@ import Image from 'next/image';
 import { useEffect, useState, Suspense, use } from 'react';
 import { fetchDocs } from '@/lib/sanity';
 import { urlFor } from '@/lib/sanity';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 function ProjectDetail({ params }) {
   const router = useRouter();
@@ -65,8 +70,7 @@ function ProjectDetail({ params }) {
     <div className="max-h-screen bg-[#C1FF00] text-black">
       {/* Header - Fixed */}
       <header className="fixed top-0 left-0 w-1/4 h-full z-50 p-4 lg:p-8 flex flex-col justify-between items-start">
-       
-        <div className="text-sm">
+        <div className="flex flex-col gap-4 text-sm origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
           <h1 className="text-4xl lg:text-6xl mb-6">
             {project.title}
           </h1>
@@ -79,7 +83,7 @@ function ProjectDetail({ params }) {
               {project.keywords.map((keyword, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 bg-black text-white rounded-full text-sm"
+                  className="mr-8"
                 >
                   {keyword}
                 </span>
@@ -87,7 +91,7 @@ function ProjectDetail({ params }) {
             </div>
 
           )}
-          <p className="">{project.description}</p>
+          <pre className="whitespace-pre-wrap break-words ">{project.description}</pre>
           <p className="">{project.client || 'Personal Project'}</p>
         </div>
          <button
@@ -97,30 +101,35 @@ function ProjectDetail({ params }) {
           <svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.92 0H61.92V3.6H21.67C17.78 3.6 15.19 6.18999 15.19 10.08C15.19 11.66 15.98 13.39 17.13 14.54L78.48 75.96L75.96 78.48L14.54 17.06C13.46 15.98 11.66 15.19 10.08 15.19C6.19 15.19 3.60001 17.78 3.60001 21.67V61.92H0V16.92L16.92 0Z" fill="black" />
           </svg>
-
         </button>
       </header>
 
-      {/* Main Content */}
-      <main className="fixed top-0 right-0 w-3/4 px-4 lg:p-8">
-
-        {/* Gallery */}
+      {/* Gallery */}
+      <main className="fixed top-0 right-0 w-3/4 h-full p-8">
         {project.images && project.images.length > 0 && (
-          <section className="grid gap-6">
-            {project.images.map((image, index) => (
-              <div
-                key={index}
-                className="relative w-full h-[300px] lg:h-[600px] rounded-2xl overflow-hidden"
-              >
-                <Image
-                  src={urlFor(image).width(1200).quality(90).url()}
-                  alt={`${project.title} - 이미지 ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
-              </div>
-            ))}
+          <section className="w-full h-full">
+            <Swiper
+              modules={[Navigation, Pagination]}
+              spaceBetween={30}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              className="w-full h-full"
+            >
+              {project.images.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <Image
+                      src={urlFor(image).width(1200).quality(90).url()}
+                      alt={`${project.title} - 이미지 ${index + 1}`}
+                      fill
+                      className="object-contain"
+                      priority={index === 0}
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </section>
         )}
 
