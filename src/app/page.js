@@ -231,8 +231,8 @@ function HomeContent() {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   className={`h-full w-auto relative transition-all duration-400 ease-in-out ${currentPage === 'about'
-                      ? 'invert blur-xs'
-                      : ' hover:invert hover:blur-xs'
+                      ? 'invert sm:sm:blur-xs'
+                      : ' hover:invert hover:sm:blur-xs'
                     } ${currentPage === ''
                       ? 'left-1/2 -translate-x-1/2'
                       : 'left-0 -translate-x-0'
@@ -273,8 +273,8 @@ function HomeContent() {
                       ? 'left-1/2 -translate-x-1/2'
                       : 'left-0 -translate-x-0'
                     } ${currentPage === 'projects'
-                      ? 'invert blur-xs'
-                      : ' hover:invert hover:blur-xs'
+                      ? 'invert sm:sm:blur-xs'
+                      : ' hover:invert hover:sm:blur-xs'
                     }`}
                   onClick={() => handlePageChange('projects')}
                   onMouseEnter={() => handleMouseEnter('projects')}
@@ -321,7 +321,7 @@ function HomeContent() {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${currentPage === 'lab'
-                      ? 'invert blur-xs'
+                      ? 'invert sm:blur-xs'
                       : ' hover:invert hover:blur-xs'
                     }  ${currentPage === ''
                       ? 'left-1/2 -translate-x-1/2'
