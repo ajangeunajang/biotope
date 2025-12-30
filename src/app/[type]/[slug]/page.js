@@ -143,7 +143,7 @@ function ProjectDetail({ params }) {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block  text-[#C1FF00] inline-block pt-12 hover:opacity-80 transition-opacity"
+                      className="inline-block text-[#C1FF00] inline-block pt-12 hover:saturate-0 hover:brightness-300 transition-all druation-300"
                     >
 
                       <span className="border-b-[3px] border-dotted  text-base sm:text-xl ">{project.demo}</span>

@@ -185,7 +185,7 @@ function HomeContent() {
         {(currentPage !== 'lab') && (
           <button
             onClick={() => setIsNightMode(!isNightMode)}
-            className={`fixed z-100 top-[calc(12vh+4.5rem)] rotate-180 lg:rotate-0 left-2 scale-60 lg:bottom-4 lg:left-4 lg:top-auto lg:scale-100 z-50 w-12 h-12 hover:rotate-330 transform transition-all duration-300 flex items-center justify-center ${isNightMode ? 'invert' : ''}`}
+            className={`fixed z-100 top-[calc(12vh+4.5rem)] animate-spin rotate-180 lg:rotate-0 left-2 scale-60 lg:bottom-4 lg:left-4 lg:top-auto lg:scale-100 z-50 w-12 h-12 hover:invert transform transition-all duration-300 flex items-center justify-center ${isNightMode ? 'invert' : ''}`}
             aria-label="Toggle night mode"
           >
             
