@@ -195,6 +195,7 @@ export default defineConfig({
             options: {
               layout: 'gallery',
             },
+            validation: (Rule) => Rule.required().min(1),
           },
           {
             title: 'Client',
@@ -310,6 +311,7 @@ export default defineConfig({
             options: {
               layout: 'gallery',
             },
+            validation: (Rule) => Rule.required().min(1),
           },
 
           {
