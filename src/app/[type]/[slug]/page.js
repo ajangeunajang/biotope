@@ -71,7 +71,7 @@ function ProjectDetail({ params }) {
 
       {/* LEFT 1/4 - Fixed */}
       <section className="overflow-scroll overflow-x-hidden w-full lg:w-1/4 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start">
-        
+
         {/* Mobile Gallery */}
         <div className="lg:hidden min-h-1/3 w-full">
           {project.images && project.images.length > 0 && (
@@ -135,30 +135,30 @@ function ProjectDetail({ params }) {
             <div className='overflow-hidden w-full relative'>
               <pre className="h-full overflow-scroll whitespace-pre-wrap break-words sm:text-3xl leading-tight pt-8 lg:pt-20 pb-30">
                 {project.description}
+
+                {/* Link */}
+                {project.demo && (
+                  <div className="flex flex-col ">
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block  text-[#C1FF00] inline-block pt-12 hover:opacity-80 transition-opacity"
+                    >
+
+                      <span className="border-b-[3px] border-dotted  text-base sm:text-xl ">{project.demo}</span>
+                    </a></div>
+                )}
               </pre>
 
               {/* fade  */}
               <div className="absolute top-0 right-0 w-full h-8 lg:h-20 bg-gradient-to-b from-black via-black via-black/50 to-transparent pointer-events-none"></div>
               <div className="absolute bottom-0 right-0 w-full h-30 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
             </div>
-
-            {/* Demo Link */}
-            {project.demo && (
-              <section className="mt-12 text-center">
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-8 py-4 bg-black text-white rounded-full hover:opacity-80 transition-opacity"
-                >
-                  View Demo →
-                </a>
-              </section>
-            )}
           </main>
 
           {/* Details */}
-          <div className="ml-40 lg:ml-50 text-base sm:text-xl flex flex-col gap-2 text-[#C1FF00]">
+          <div className="ml-40 lg:ml-50 text-base sm:text-xl flex flex-col gap-2">
             {project.scope && project.scope.length > 0 && (
               <div className="flex gap-2">
                 <div className='border-t flex-1 max-w-30 min-w-20 lg:w-40'>Scope</div>

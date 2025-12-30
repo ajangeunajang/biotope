@@ -191,7 +191,7 @@ export default defineConfig({
             type: 'array',
             of: [{ type: 'image' }],
             description:
-              'JPEG 또는 WebP/AVIF 이미지를 권장합니다 (최대 2000px, 1MB 이하)',
+              'JPEG 또는 WebP/AVIF 이미지 권장 (최대 2000px, 1MB 이하)',
             options: {
               layout: 'gallery',
             },
@@ -316,7 +316,7 @@ export default defineConfig({
             title: 'Demo',
             name: 'demo',
             type: 'url',
-            description: '데모 사이트 주소를 입력하세요',
+            description: '사이트 URL을 입력하세요',
           },
           // {
           //   title: 'Featured',
