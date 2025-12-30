@@ -13,6 +13,8 @@ export default function ProjectModal() {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [cardRect, setCardRect] = useState(null);
+  const [thumbnailUrl, setThumbnailUrl] = useState(null);
 
   useEffect(() => {
     const checkUrl = () => {
@@ -22,6 +24,20 @@ export default function ProjectModal() {
       if (match) {
         const [, type, slug] = match;
         setIsOpen(true);
+
+        // history.state에서 카드 위치 정보 가져오기
+        if (window.history.state?.cardRect) {
+          setCardRect(window.history.state.cardRect);
+        } else {
+          setCardRect(null);
+        }
+
+        // history.state에서 썸네일 URL 가져오기
+        if (window.history.state?.thumbnailUrl) {
+          setThumbnailUrl(window.history.state.thumbnailUrl);
+        } else {
+          setThumbnailUrl(null);
+        }
 
         // history.state에 프로젝트 데이터가 있으면 사용, 없으면 로드
         if (window.history.state?.project) {
@@ -33,6 +49,8 @@ export default function ProjectModal() {
       } else {
         setIsOpen(false);
         setProject(null);
+        setCardRect(null);
+        setThumbnailUrl(null);
       }
     };
 
@@ -98,22 +116,69 @@ export default function ProjectModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100]"
+            className="fixed inset-0 bg-black/50 filter backdrop-blur-sm z-[100]"
             onClick={handleClose}
           />
 
-          {/* 모달 컨텐츠 */}
+          {/* 모달 컨테이너 - 썸네일 배경으로 0.5초 동안 확장 */}
           <motion.div
-            initial={{ opacity: 0, y: 0 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={cardRect ? {
+              top: cardRect.top,
+              left: cardRect.left,
+              width: cardRect.width,
+              height: cardRect.height,
+              borderRadius: '50px'
+            } : {
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100vh',
+              borderRadius: '0px'
+            }}
+            animate={{
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100vh',
+              borderRadius: '0px'
+            }}
             exit={{ y: '100%' }}
             transition={{
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1]
+              top: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
+              left: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
+              width: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
+              height: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
+              borderRadius: { delay: 0.4, duration: 0.2 }
             }}
-            className="fixed top-0 h-screen inset-0 z-[101] overflow-auto"
+            style={{
+              backgroundImage: thumbnailUrl ? `url('${thumbnailUrl}')` : 'none',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+            className="fixed z-[101] overflow-hidden"
           >
-            <div className="h-full w-full bg-black text-white overflow-hidden">
+            {/* 썸네일 위 검정 투명 레이어 backdrop blur */}
+            {thumbnailUrl && (
+              <motion.div
+                // initial={{ opacity: 1 }}
+                // animate={{ opacity: 0 }}
+                // transition={{ delay: 0.4, duration: 0.3 }}
+                className="absolute inset-0 bg-black/50 filter backdrop-blur-md"
+              />
+            )}
+
+            {/* 검은색 배경 + 내용 - 0.35초 후 fade in */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                delay: cardRect ? 0.35 : 0,
+                duration: 0.5,
+                ease: [0.85, 0, 0.15, 1]
+              }}
+              className="h-full w-full bg-black text-white overflow-auto relative z-10"
+            >
               {loading ? (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-xl flex items-center gap-2">
@@ -281,7 +346,7 @@ export default function ProjectModal() {
                   </section>
                 </>
               ) : null}
-            </div>
+            </motion.div>
           </motion.div>
         </>
       )}

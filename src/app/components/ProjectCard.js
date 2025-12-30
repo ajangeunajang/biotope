@@ -3,13 +3,29 @@ import { urlFor } from '@/lib/sanity';
 
 export default function ProjectCard({ project, type = 'project' }) {
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     // URL 안전한 방식으로 slug 생성 - 한글도 지원
     const slug = project.slug?.current || encodeURIComponent(project.title);
 
+    // 클릭한 카드의 위치와 크기 저장
+    const rect = e.currentTarget.getBoundingClientRect();
+
     // URL만 변경 (실제 라우팅 없이)
     window.history.pushState(
-      { type, slug, project },
+      {
+        type,
+        slug,
+        project,
+        // 카드 위치 정보 저장
+        cardRect: {
+          top: rect.top,
+          left: rect.left,
+          width: rect.width,
+          height: rect.height
+        },
+        // 썸네일 URL 저장
+        thumbnailUrl: thumbnailUrl
+      },
       '',
       `/${type}/${slug}`
     );
