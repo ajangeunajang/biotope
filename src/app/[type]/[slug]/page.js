@@ -67,7 +67,7 @@ function ProjectDetail({ params }) {
   if (!project) return null;
 
   return (
-    <div className="h-screen bg-black text-white">
+    <div className="h-screen w-full bg-black text-white">
 
       {/* LEFT 1/4 - Fixed */}
       <section className="overflow-scroll overflow-x-hidden w-full lg:w-1/4 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start">
@@ -103,7 +103,7 @@ function ProjectDetail({ params }) {
         </div>
 
         {/* Article */}
-        <article className="flex-1 lg:overflow-hidden flex flex-col justify-between origin-left scale-x-[0.6] w-3/2 text-xl lg:text-3xl">
+        <article className="flex-1 lg:overflow-hidden flex flex-col justify-between origin-left scale-x-[0.6] w-[166%] text-xl lg:text-3xl">
 
           <main className='flex flex-col overflow-hidden'>
 
@@ -114,7 +114,7 @@ function ProjectDetail({ params }) {
               {project.host}
             </h2>
 
-            <p className="lg:mt-6 lg:text-[#C1FF00]">
+            <p className="sm:text-2xl lg:mt-6 lg:text-[#C1FF00]">
               {project.year}
             </p>
             {/* Keywords */}
@@ -133,7 +133,7 @@ function ProjectDetail({ params }) {
 
             {/* Description */}
             <div className='overflow-hidden w-full relative'>
-              <pre className="h-full overflow-scroll whitespace-pre-wrap break-words lg:text-3xl leading-tight pt-8 lg:pt-20 pb-30">
+              <pre className="h-full overflow-scroll whitespace-pre-wrap break-words sm:text-3xl leading-tight pt-8 lg:pt-20 pb-30">
                 {project.description}
               </pre>
 
@@ -158,11 +158,11 @@ function ProjectDetail({ params }) {
           </main>
 
           {/* Details */}
-          <div className="ml-40 lg:ml-0 text-base sm:text-xl flex flex-col gap-2 text-[#C1FF00]">
+          <div className="ml-40 lg:ml-50 text-base sm:text-xl flex flex-col gap-2 text-[#C1FF00]">
             {project.scope && project.scope.length > 0 && (
               <div className="flex gap-2">
-                <div className='border-t w-30 min-w-20 lg:w-40'>Scope</div>
-                <div className='border-t min-w-[20rem] lg:min-w-[30rem]'>
+                <div className='border-t flex-1 max-w-30 min-w-20 lg:w-40'>Scope</div>
+                <div className='border-t flex-1'>
                   {project.scope.map((scopeItem, index) => (
                     <div
                       key={index}
@@ -174,8 +174,8 @@ function ProjectDetail({ params }) {
               </div>
             )}
             <div className="flex gap-2">
-              <div className='border-t w-30 min-w-20 lg:w-40'>Client</div>
-              <div className='border-t min-w-[20rem] lg:min-w-[30rem]'>
+              <div className='border-t flex-1 max-w-30 min-w-20 lg:w-40'>Client</div>
+              <div className='border-t flex-1'>
                 {project.client || 'Personal Project'}
               </div>
             </div>
@@ -185,7 +185,7 @@ function ProjectDetail({ params }) {
         {/* back ui */}
         <button
           onClick={() => router.back()}
-          className="hover:brightness-100 brightness-300 hover:saturate-100 saturate-0 transition-all hover:-rotate-180 -rotate-90 transform duration-300 fixed bottom-4 scale-90 lg:relative lg:bottom-auto lg:scale-100"
+          className="brightness-100 hover:brightness-300 saturate-100 hover:saturate-0 transition-all hover:-rotate-180 -rotate-90 transform duration-300 fixed bottom-4 lg:bottom-8 scale-90 lg:scale-100"
         >
           <svg width="79" height="79" viewBox="0 0 79 79" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16.92 0H61.92V3.6H21.67C17.78 3.6 15.19 6.18999 15.19 10.08C15.19 11.66 15.98 13.39 17.13 14.54L78.48 75.96L75.96 78.48L14.54 17.06C13.46 15.98 11.66 15.19 10.08 15.19C6.19 15.19 3.60001 17.78 3.60001 21.67V61.92H0V16.92L16.92 0Z" fill="#C1FF00" />
