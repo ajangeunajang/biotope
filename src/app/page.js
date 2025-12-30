@@ -136,7 +136,7 @@ function HomeContent() {
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top mix-blend-difference blur-sm brightness-80 transition-opacity duration-[1500ms] ease-in-out ${currentPage === 'lab' ? 'opacity-0' : isNightMode ? 'opacity-100' : 'opacity-0'
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top mix-blend-difference blur-xs lg:blur-sm brightness-80 transition-opacity duration-[1500ms] ease-in-out ${currentPage === 'lab' ? 'opacity-0' : isNightMode ? 'opacity-100' : 'opacity-0'
               }`}
           />
         </div>

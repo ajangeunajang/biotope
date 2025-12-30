@@ -70,7 +70,7 @@ function ProjectDetail({ params }) {
     <div className="h-screen bg-black text-white">
 
       {/* LEFT 1/4 - Fixed */}
-      <section className="overflow-scroll w-full lg:w-1/4 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-8 lg:gap-20 justify-start items-start">
+      <section className="overflow-scroll overflow-x-hidden w-full lg:w-1/4 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start">
         
         {/* Mobile Gallery */}
         <div className="lg:hidden min-h-1/3 w-full">
@@ -110,11 +110,11 @@ function ProjectDetail({ params }) {
             <h1 className="text-4xl lg:text-6xl">
               {project.title}
             </h1>
-            <h2 className="text-4xl lg:text-5xl mt-2">
+            <h2 className="text-4xl lg:text-5xl lg:mt-2">
               {project.host}
             </h2>
 
-            <p className="mt-6 lg:text-[#C1FF00]">
+            <p className="lg:mt-6 lg:text-[#C1FF00]">
               {project.year}
             </p>
             {/* Keywords */}
