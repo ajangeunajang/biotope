@@ -1,6 +1,7 @@
 import './globals.css';
 import './multilingual.css';
 import MultilingualProvider from './components/MultilingualProvider';
+import ProjectModal from './components/ProjectModal';
 
 export const metadata = {
   title: 'BIOTOPE',
@@ -53,7 +54,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={`antialiased`}>
-        <MultilingualProvider>{children}</MultilingualProvider>
+        <MultilingualProvider>
+          {children}
+          <ProjectModal />
+        </MultilingualProvider>
       </body>
     </html>
   );

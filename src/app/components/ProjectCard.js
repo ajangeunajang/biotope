@@ -1,14 +1,21 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import { urlFor } from '@/lib/sanity';
 
 export default function ProjectCard({ project, type = 'project' }) {
-  const router = useRouter();
 
   const handleClick = () => {
     // URL 안전한 방식으로 slug 생성 - 한글도 지원
     const slug = project.slug?.current || encodeURIComponent(project.title);
-    router.push(`/${type}/${slug}`);
+
+    // URL만 변경 (실제 라우팅 없이)
+    window.history.pushState(
+      { type, slug, project },
+      '',
+      `/${type}/${slug}`
+    );
+
+    // popstate 이벤트 트리거 (ProjectModal이 감지하도록)
+    window.dispatchEvent(new PopStateEvent('popstate'));
   };
 
   // 썸네일이 없을 때 랜덤 이미지 선택 (프로젝트별로 일관성 유지)
@@ -53,9 +60,7 @@ export default function ProjectCard({ project, type = 'project' }) {
         <h3 className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
           {project.title}
         </h3>
-        {/* <div className="scale-x-[0.6] group-hover:opacity-0 transition-opacity duration-300">
-          {project.year}
-        </div> */}
+       
         <div className="scale-x-[0.6] flex flex-wrap gap-4 justify-center group-hover:opacity-0 transition-opacity duration-300">
           {project.keywords && project.keywords.length > 0
             ? project.keywords.map((keyword, index) => (

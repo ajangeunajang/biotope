@@ -12,6 +12,7 @@
     "@sanity/client": "^7.11.2",
     "@sanity/structure": "^2.36.2",
     "@sanity/vision": "^4.10.2",
+    "framer-motion": "^12.23.26",
     "multilingual.js": "^0.1.41",
     "next": "^16.1.1",
     "next-sanity": "^11.4.2",
