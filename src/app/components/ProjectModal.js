@@ -223,10 +223,10 @@ export default function ProjectModal() {
                     {/* Article */}
                     <article className="flex-1 lg:overflow-hidden flex flex-col justify-between origin-left scale-x-[0.6] w-[166%] text-xl lg:text-3xl">
                       <main className="flex flex-col overflow-hidden">
-                        <h1 className="text-4xl lg:text-6xl">{project.title}</h1>
-                        <h2 className="text-4xl lg:text-5xl lg:mt-2">{project.host}</h2>
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl">{project.title}</h1>
+                        <h2 className="text-4xl sm:text-5xl lg:text-5xl sm:mt-2">{project.host}</h2>
 
-                        <p className="sm:text-2xl lg:mt-6 text-[#C1FF00]">{project.year}</p>
+                        <p className="sm:text-2xl sm:mt-6 text-[#C1FF00]">{project.year}</p>
 
                         {/* Keywords */}
                         {project.keywords && project.keywords.length > 0 && (
@@ -259,14 +259,14 @@ export default function ProjectModal() {
                         )}
 
                         {/* Description */}
-                        <div className="overflow-hidden w-full relative">
-                          <pre className="h-full overflow-scroll whitespace-pre-wrap break-words sm:text-3xl leading-tight pt-8 lg:pt-20 pb-30">
+                        <div className="overflow-hidden w-full relative pl-40 lg:pl-0">
+                          <pre className="h-full overflow-scroll whitespace-pre-wrap break-words sm:text-3xl leading-tight pt-16 pb-10">
                             {project.description}
                           </pre>
 
                           {/* fade */}
-                          <div className="absolute top-0 right-0 w-full h-8 lg:h-20 bg-gradient-to-b from-black via-black via-black/50 to-transparent pointer-events-none"></div>
-                          <div className="absolute bottom-0 right-0 w-full h-30 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
+                          <div className="absolute top-0 right-0 w-full h-16 bg-gradient-to-b from-black via-black via-black/50 to-transparent pointer-events-none"></div>
+                          <div className="absolute bottom-0 right-0 w-full h-10 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
                         </div>
                       </main>
 
