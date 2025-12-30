@@ -23,9 +23,12 @@ export default function ProjectCard({ project, type = 'project' }) {
     return `/thumb/${imageNumber}.webp`;
   };
 
+  // 썸네일 우선순위: 1. thumbnail 2. 갤러리 첫 이미지 3. 랜덤 이미지
   const thumbnailUrl = project.thumbnail
     ? urlFor(project.thumbnail).width(800).quality(80).url()
-    : getRandomThumb(project.title);
+    : project.images && project.images.length > 0
+      ? urlFor(project.images[0]).width(800).quality(80).url()
+      : getRandomThumb(project.title);
 
   return (
     <div

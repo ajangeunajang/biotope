@@ -222,11 +222,13 @@ export default defineConfig({
             title: 'title',
             subtitle: 'description',
             media: 'thumbnail',
+            images: 'images',
           },
           prepare(selection) {
-            const { title, subtitle, featured } = selection;
+            const { title, subtitle, featured, media, images } = selection;
             return Object.assign({}, selection, {
               title: `${featured ? '⭐ ' : ''}${title}`,
+              media: media || (images && images[0]) || undefined,
             });
           },
         },
@@ -333,11 +335,13 @@ export default defineConfig({
             title: 'title',
             subtitle: 'description',
             media: 'thumbnail',
+            images: 'images',
           },
           prepare(selection) {
-            const { title, subtitle, featured } = selection;
+            const { title, subtitle, featured, media, images } = selection;
             return Object.assign({}, selection, {
               title: `${featured ? '⭐ ' : ''}${title}`,
+              media: media || (images && images[0]) || undefined,
             });
           },
         },
