@@ -127,7 +127,7 @@ function HomeContent() {
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top mix-blend-saturation transition-opacity duration-[1500ms] ease-in-out ${currentPage === 'lab' ? 'opacity-0' : isNightMode ? 'opacity-0' : 'opacity-100'
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top transition-opacity duration-[1500ms] ease-in-out ${currentPage === 'lab' ? 'opacity-0' : isNightMode ? 'opacity-0' : 'opacity-100'
               }`}
           />
           {/* Night mode image layer */}
