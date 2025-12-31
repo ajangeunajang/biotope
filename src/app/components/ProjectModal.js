@@ -298,7 +298,7 @@ export default function ProjectModal() {
                     {/* back ui */}
                     <button
                       onClick={handleClose}
-                      className="brightness-100 hover:brightness-300 saturate-100 hover:saturate-0 transition-all hover:-rotate-180 -rotate-90 transform duration-300 fixed bottom-4 lg:bottom-8 scale-90 lg:scale-100 z-50"
+                      className="brightness-100 hover:brightness-300 saturate-100 hover:saturate-0 transition-all hover:-rotate-180 -rotate-90 transform duration-300 fixed left-4 lg:left-8 bottom-4 lg:bottom-8 scale-90 lg:scale-100 z-50"
                     >
                       <svg
                         width="79"
