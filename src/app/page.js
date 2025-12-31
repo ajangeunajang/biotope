@@ -199,7 +199,7 @@ function HomeContent() {
         {currentPage !== "lab" && (
           <button
             onClick={() => setIsNightMode(!isNightMode)}
-            className={`fixed z-100 top-[calc(12vh+4.5rem)] animate-spin rotate-180 lg:rotate-0 left-2 scale-60 lg:bottom-4 lg:left-4 lg:top-auto lg:scale-100 z-50 w-12 h-12 hover:invert transform transition-all duration-300 flex items-center justify-center ${isNightMode ? "invert" : ""}`}
+            className={`fixed z-100 top-[calc(12vh+4.5rem)] sm:top-[calc(21vh+5rem)] animate-spin rotate-180 lg:rotate-0 left-2 scale-60 lg:bottom-4 lg:left-4 lg:top-auto sm:scale-100 z-50 w-12 h-12 hover:invert transform transition-all duration-300 flex items-center justify-center ${isNightMode ? "invert" : ""}`}
             aria-label="Toggle night mode"
           >
             <svg
@@ -246,7 +246,7 @@ function HomeContent() {
             }`}
           >
             <ul>
-              <li className={`mb-4 lg:mb-4 h-[4vh] lg:h-[16vh]`}>
+              <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh]`}>
                 <svg
                   width="359"
                   height="141"
@@ -287,7 +287,7 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li className={`mb-4 lg:mb-4 h-[4vh] lg:h-[16vh]`}>
+              <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh]`}>
                 <svg
                   width="523"
                   height="142"
@@ -340,7 +340,7 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li className={`mb-4 lg:mb-4 h-[4vh] lg:h-[16vh]`}>
+              <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] lg:h-[16vh]`}>
                 <svg
                   width="203"
                   height="136"
