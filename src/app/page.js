@@ -138,11 +138,11 @@ function HomeContent() {
           />
           {/* Night mode image layer */}
           <Image
-            src="/bg.png"
+            src="/biotope_n.png"
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top mix-blend-difference blur-xs lg:blur-sm brightness-80 transition-opacity duration-[1500ms] ease-in-out ${
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top blur-xs lg:blur-sm transition-opacity duration-[1500ms] ease-in-out ${
               currentPage === "lab"
                 ? "opacity-0"
                 : isNightMode
@@ -246,7 +246,9 @@ function HomeContent() {
             }`}
           >
             <ul>
-              <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh]`}>
+              <li
+                className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh]`}
+              >
                 <svg
                   width="359"
                   height="141"
@@ -287,7 +289,9 @@ function HomeContent() {
                   />
                 </svg>
               </li>
-              <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh]`}>
+              <li
+                className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh]`}
+              >
                 <svg
                   width="523"
                   height="142"
