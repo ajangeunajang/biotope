@@ -262,7 +262,7 @@ export default function ProjectModal() {
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="lg:mt-3 flex gap-4 text-[#C1FF00] hover:saturate-0 hover:brightness-300 transition-all duration-500"
+                            className="mt-2 lg:mt-3 flex gap-4 text-[#C1FF00] hover:saturate-0 hover:brightness-300 transition-all duration-500"
                           >
                             <svg
                               width="23"
