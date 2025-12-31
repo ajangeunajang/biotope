@@ -116,7 +116,7 @@ export default function ProjectModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/50 filter backdrop-blur-sm z-[100]"
+            className="fixed inset-0 bg-black/50 filter backdrop-blur-sm z-[100] select-none"
             onClick={handleClose}
           />
 
@@ -167,7 +167,7 @@ export default function ProjectModal() {
                 // initial={{ opacity: 1 }}
                 // animate={{ opacity: 0 }}
                 // transition={{ delay: 0.4, duration: 0.3 }}
-                className="absolute inset-0 bg-black/50 filter backdrop-blur-md"
+                className="absolute inset-0 bg-black/50 filter backdrop-blur-md select-none"
               />
             )}
 
@@ -196,7 +196,7 @@ export default function ProjectModal() {
                   <section className="overflow-scroll overflow-x-hidden w-full lg:w-1/4 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start">
                     {/* Mobile Gallery */}
                     <div className="lg:hidden w-full aspect-16/9">
-                      {project.images && project.images.length > 0 && (
+                      {project.images && project.images.length > 0 ? (
                         <section className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-[#3D3D3D]">
                           <Swiper
                             modules={[Navigation, Pagination]}
@@ -224,7 +224,8 @@ export default function ProjectModal() {
                             ))}
                           </Swiper>
                         </section>
-                      )}
+                      ) : <div className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-[#3D3D3D] animate-pulse" />
+                      }
                     </div>
 
                     {/* Article */}
@@ -261,7 +262,7 @@ export default function ProjectModal() {
                             href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="lg:mt-3 flex gap-4 text-[#C1FF00] hover:saturate-0 hover:brightness-300 transition-all duration-300"
+                            className="lg:mt-3 flex gap-4 text-[#C1FF00] hover:saturate-0 hover:brightness-300 transition-all duration-500"
                           >
                             <svg
                               width="23"
