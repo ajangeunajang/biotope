@@ -122,38 +122,42 @@ export default function ProjectModal() {
 
           {/* 모달 컨테이너 - 썸네일 배경으로 0.5초 동안 확장 */}
           <motion.div
-            initial={cardRect ? {
-              top: cardRect.top,
-              left: cardRect.left,
-              width: cardRect.width,
-              height: cardRect.height,
-              borderRadius: '50px'
-            } : {
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100vh',
-              borderRadius: '0px'
-            }}
+            initial={
+              cardRect
+                ? {
+                    top: cardRect.top,
+                    left: cardRect.left,
+                    width: cardRect.width,
+                    height: cardRect.height,
+                    borderRadius: "50px",
+                  }
+                : {
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100vh",
+                    borderRadius: "0px",
+                  }
+            }
             animate={{
               top: 0,
               left: 0,
-              width: '100%',
-              height: '100vh',
-              borderRadius: '0px'
+              width: "100%",
+              height: "100vh",
+              borderRadius: "0px",
             }}
-            exit={{ y: '100%' }}
+            exit={{ y: "100%" }}
             transition={{
               top: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
               left: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
               width: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
               height: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
-              borderRadius: { delay: 0.4, duration: 0.2 }
+              borderRadius: { delay: 0.4, duration: 0.2 },
             }}
             style={{
-              backgroundImage: thumbnailUrl ? `url('${thumbnailUrl}')` : 'none',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
+              backgroundImage: thumbnailUrl ? `url('${thumbnailUrl}')` : "none",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
             className="fixed z-[101] overflow-hidden"
           >
@@ -175,12 +179,12 @@ export default function ProjectModal() {
               transition={{
                 delay: cardRect ? 0.35 : 0,
                 duration: 0.5,
-                ease: [0.85, 0, 0.15, 1]
+                ease: [0.85, 0, 0.15, 1],
               }}
               className="h-full w-full bg-black text-white overflow-auto relative z-10"
             >
               {loading ? (
-                <div className="h-full flex items-center justify-center">
+                <div className="h-full flex items-center justify-center animate-pulse">
                   <div className="text-xl flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent animate-spin"></div>
                     <span>Loading...</span>
@@ -200,13 +204,16 @@ export default function ProjectModal() {
                             slidesPerView={1}
                             pagination={{ clickable: true }}
                             className="w-full h-full"
-                            style={{ isolation: 'auto' }}
+                            style={{ isolation: "auto" }}
                           >
                             {project.images.map((image, index) => (
                               <SwiperSlide key={index}>
                                 <div className="relative w-full h-full flex items-center justify-center rounded-4xl lg:rounded-[100px] overflow-hidden">
                                   <Image
-                                    src={urlFor(image).width(1200).quality(90).url()}
+                                    src={urlFor(image)
+                                      .width(1200)
+                                      .quality(90)
+                                      .url()}
                                     alt={`${project.title} - 이미지 ${index + 1}`}
                                     fill
                                     className="object-contain"
@@ -223,10 +230,16 @@ export default function ProjectModal() {
                     {/* Article */}
                     <article className="flex-1 lg:overflow-hidden flex flex-col justify-between origin-left scale-x-[0.6] w-[166%] text-xl lg:text-3xl">
                       <main className="flex flex-col overflow-hidden">
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl">{project.title}</h1>
-                        <h2 className="text-4xl sm:text-5xl lg:text-5xl sm:mt-2">{project.host}</h2>
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl">
+                          {project.title}
+                        </h1>
+                        <h2 className="text-4xl sm:text-5xl lg:text-5xl sm:mt-2">
+                          {project.host}
+                        </h2>
 
-                        <p className="sm:text-2xl sm:mt-6 text-[#C1FF00]">{project.year}</p>
+                        <p className="sm:text-2xl sm:mt-6 text-[#C1FF00]">
+                          {project.year}
+                        </p>
 
                         {/* Keywords */}
                         {project.keywords && project.keywords.length > 0 && (
@@ -244,18 +257,29 @@ export default function ProjectModal() {
 
                         {/* Link */}
                         {project.demo && (
-                          <div>
-                            <a
-                              href={project.demo}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-block text-[#C1FF00] hover:saturate-0 hover:brightness-300 transition-all duration-300"
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="lg:mt-3 flex gap-4 text-[#C1FF00] hover:saturate-0 hover:brightness-300 transition-all duration-300"
+                          >
+                            <svg
+                              width="23"
+                              height="23"
+                              viewBox="0 0 23 23"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
                             >
-                              <span className="border-b-[3px] border-dotted text-base sm:text-xl">
-                                {project.demo}
-                              </span>
-                            </a>
-                          </div>
+                              <path
+                                d="M11.0215 5.47852H4.9707C3.15532 5.47852 1.94531 6.68412 1.94531 8.49121V17.0967C1.94536 18.8234 3.05031 19.9974 4.73242 20.0986H13.5527C15.3598 20.0986 16.5654 18.8886 16.5654 17.0732V11.0225H18.501V22.0439H11.0215V22.0449H0V3.54297H11.0215V5.47852ZM22.6338 3.54785V11.9668L22.6221 11.9551H20.8145V4.77734C20.8145 4.35991 20.5363 4.08203 20.1191 4.08203C19.9338 4.08215 19.7139 4.17469 19.5518 4.33691L8.75293 15.1553L7.47852 13.8799L18.2891 3.07324C18.4396 2.91099 18.5438 2.67878 18.5439 2.50488C18.5439 2.08748 18.2657 1.80863 17.8486 1.80859H10.6768V0H19.0879L22.6338 3.54785Z"
+                                fill="#C1FF00"
+                              />
+                            </svg>
+
+                            <span className="text-base sm:text-xl">
+                              Visit Link
+                            </span>
+                          </a>
                         )}
 
                         {/* Description */}
@@ -289,7 +313,7 @@ export default function ProjectModal() {
                             Client
                           </div>
                           <div className="border-t flex-1">
-                            {project.client || 'Personal Project'}
+                            {project.client || "Personal Project"}
                           </div>
                         </div>
                       </div>
@@ -317,7 +341,7 @@ export default function ProjectModal() {
 
                   {/* RIGHT 3/4 - Gallery */}
                   <section className="hidden lg:block fixed top-0 right-0 w-3/4 h-full p-4 lg:p-8 pl-0">
-                    {project.images && project.images.length > 0 && (
+                    {project.images && project.images.length > 0 ? (
                       <section className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-[#3D3D3D]">
                         <Swiper
                           modules={[Navigation, Pagination]}
@@ -325,13 +349,16 @@ export default function ProjectModal() {
                           slidesPerView={1}
                           pagination={{ clickable: true }}
                           className="w-full h-full"
-                          style={{ isolation: 'auto' }}
+                          style={{ isolation: "auto" }}
                         >
                           {project.images.map((image, index) => (
                             <SwiperSlide key={index}>
                               <div className="relative w-full h-full flex items-center justify-center rounded-4xl lg:rounded-[100px] overflow-hidden">
                                 <Image
-                                  src={urlFor(image).width(1200).quality(90).url()}
+                                  src={urlFor(image)
+                                    .width(1200)
+                                    .quality(90)
+                                    .url()}
                                   alt={`${project.title} - 이미지 ${index + 1}`}
                                   fill
                                   className="object-contain"
@@ -342,6 +369,8 @@ export default function ProjectModal() {
                           ))}
                         </Swiper>
                       </section>
+                    ) : (
+                      <div className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-[#3D3D3D] animate-pulse" />
                     )}
                   </section>
                 </>
