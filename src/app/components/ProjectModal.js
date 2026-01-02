@@ -195,7 +195,7 @@ export default function ProjectModal() {
                   {/* LEFT 1/4 - Fixed */}
                   <section className="overflow-scroll overflow-x-hidden w-full lg:w-1/4 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start">
                     {/* Mobile Gallery */}
-                    <div className="lg:hidden w-full aspect-16/9">
+                    <div className="lg:hidden w-full aspect-4/3">
                       {project.images && project.images.length > 0 ? (
                         <section className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-[#3D3D3D]">
                           <Swiper
