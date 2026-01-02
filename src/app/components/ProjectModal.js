@@ -106,47 +106,64 @@ export default function ProjectModal() {
     window.dispatchEvent(new PopStateEvent('popstate'));
   };
 
+  const overlayVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.3 }
+    }
+  };
+
+  const modalVariants = {
+    initial: cardRect
+      ? {
+          top: cardRect.top,
+          left: cardRect.left,
+          width: cardRect.width,
+          height: cardRect.height,
+          borderRadius: "50px",
+        }
+      : {
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100dvh",
+          borderRadius: "0px",
+        },
+    animate: {
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100dvh",
+      borderRadius: "0px",
+    },
+    exit: {
+      y: "100%"
+    }
+  };
+
   return (
     <AnimatePresence mode="wait">
       {isOpen && (
         <>
           {/* 배경 오버레이 */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            variants={overlayVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             className="fixed inset-0 bg-black/50 filter backdrop-blur-sm z-[100] select-none"
+            style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
             onClick={handleClose}
           />
 
           {/* 모달 컨테이너 - 썸네일 배경으로 0.5초 동안 확장 */}
           <motion.div
-            initial={
-              cardRect
-                ? {
-                    top: cardRect.top,
-                    left: cardRect.left,
-                    width: cardRect.width,
-                    height: cardRect.height,
-                    borderRadius: "50px",
-                  }
-                : {
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100dvh",
-                    borderRadius: "0px",
-                  }
-            }
-            animate={{
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100dvh",
-              borderRadius: "0px",
-            }}
-            exit={{ y: "100%" }}
+            variants={modalVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             transition={{
               top: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
               left: { duration: 0.4, ease: [0.85, 0, 0.15, 1] },
@@ -158,6 +175,7 @@ export default function ProjectModal() {
               backgroundImage: thumbnailUrl ? `url('${thumbnailUrl}')` : "none",
               backgroundSize: "cover",
               backgroundPosition: "center",
+              pointerEvents: isOpen ? 'auto' : 'none'
             }}
             className="fixed z-[101] overflow-hidden"
           >
