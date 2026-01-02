@@ -191,11 +191,12 @@ export default function ProjectModal() {
                   </div>
                 </div>
               ) : project ? (
-                <>
-                  {/* LEFT 1/4 - Fixed */}
-                  <section className="overflow-scroll overflow-x-hidden w-full lg:w-1/4 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start">
+                <div className="fixed top-0 left-0 flex h-screen w-[100vw]">
+                  {/* LEFT - Fixed */}
+                  <section className={` ${!project.images ? "lg:w-1/3" : "lg:flex-1"} overflow-scroll overflow-x-hidden w-full min-w-[400px] lg:max-w-1/2 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start`}>
+                    
                     {/* Mobile Gallery */}
-                    <div className="lg:hidden w-full aspect-4/3">
+                    <div className={` ${!project.images ? "hidden" : ""} lg:hidden w-full aspect-[4/3]`}>
                       {project.images && project.images.length > 0 ? (
                         <section className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-[#3D3D3D]">
                           <Swiper
@@ -216,7 +217,7 @@ export default function ProjectModal() {
                                       .url()}
                                     alt={`${project.title} - 이미지 ${index + 1}`}
                                     fill
-                                    className="object-contain"
+                                    className="objㅇect-contain"
                                     priority={index === 0}
                                   />
                                 </div>
@@ -340,8 +341,8 @@ export default function ProjectModal() {
                     </button>
                   </section>
 
-                  {/* RIGHT 3/4 - Gallery */}
-                  <section className="hidden lg:block fixed top-0 right-0 w-3/4 h-full p-4 lg:p-8 pl-0">
+                  {/* RIGHT - Gallery */}
+                  <section className="hidden lg:block aspect-[4/3] h-full p-4 lg:p-8 pl-0 overflow-hidden">
                     {project.images && project.images.length > 0 ? (
                       <section className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-[#3D3D3D]">
                         <Swiper
@@ -371,10 +372,10 @@ export default function ProjectModal() {
                         </Swiper>
                       </section>
                     ) : (
-                      <div className="w-full h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-[#3D3D3D] animate-pulse" />
+                      <div className="w-1/2 h-full rounded-4xl lg:rounded-[100px] overflow-hidden bg-black" />
                     )}
                   </section>
-                </>
+                </div>
               ) : null}
             </motion.div>
           </motion.div>
