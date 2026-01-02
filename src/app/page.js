@@ -402,7 +402,7 @@ function HomeContent() {
             style={{ transform: `translateY(${footerHeight - logoOffset}px)` }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <div className="w-[520px] text-black text-sm lg:text-lg flex-wrap flex flex-row gap-2 items-center justify-center">
+            <div className="w-[520px] max-w-full text-black text-sm lg:text-lg flex-wrap flex flex-row gap-2 items-center justify-center">
               <span className="scale-x-[0.6] -mx-4">© 2026 biotope</span>
               <span className="scale-x-[0.6] -mx-4">서울특별시 성북구 고려대로7길 4</span>
               <span className="scale-x-[0.6] -mx-4">070-4571-9907</span>
