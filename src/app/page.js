@@ -84,9 +84,24 @@ const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width,
   const pathRefs = useRef([]);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // 터치 디바이스 감지
+  useEffect(() => {
+    const checkTouchDevice = () => {
+      setIsTouchDevice(
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0
+      );
+    };
+
+    checkTouchDevice();
+  }, []);
 
   const handleMouseMove = (e) => {
-    if (!svgRef.current) return;
+    // 터치 디바이스에서는 sticky 효과 비활성화
+    if (isTouchDevice || !svgRef.current) return;
 
     const rect = svgRef.current.getBoundingClientRect();
     const svgX = e.clientX - rect.left;
