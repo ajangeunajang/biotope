@@ -265,7 +265,7 @@ function HomeContent() {
           />
           {/* Night mode image layer */}
           <Image
-            src="/biotope_n.png"
+            src="/biotope_night.png"
             alt="background"
             width={1200}
             height={1000}
