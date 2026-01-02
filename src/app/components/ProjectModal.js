@@ -135,7 +135,7 @@ export default function ProjectModal() {
                     top: 0,
                     left: 0,
                     width: "100%",
-                    height: "100vh",
+                    height: "100dvh",
                     borderRadius: "0px",
                   }
             }
@@ -143,7 +143,7 @@ export default function ProjectModal() {
               top: 0,
               left: 0,
               width: "100%",
-              height: "100vh",
+              height: "100dvh",
               borderRadius: "0px",
             }}
             exit={{ y: "100%" }}
