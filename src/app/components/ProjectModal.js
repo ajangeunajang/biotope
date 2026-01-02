@@ -153,7 +153,7 @@ export default function ProjectModal() {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="fixed inset-0 bg-black/50 filter backdrop-blur-sm z-[100] select-none"
+            className={`fixed inset-0 bg-black/50 filter backdrop-blur-sm select-none ${isOpen ? 'z-[100]' : 'z-[-1]'}`}
             style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
             onClick={handleClose}
           />
@@ -177,7 +177,7 @@ export default function ProjectModal() {
               backgroundPosition: "center",
               pointerEvents: isOpen ? 'auto' : 'none'
             }}
-            className="fixed z-[101] overflow-hidden"
+            className={`fixed overflow-hidden ${isOpen ? 'z-[101]' : 'z-[-1]'}`}
           >
             {/* 썸네일 위 검정 투명 레이어 backdrop blur */}
             {thumbnailUrl && (
