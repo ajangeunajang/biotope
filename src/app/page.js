@@ -25,7 +25,7 @@ const StickyPath = ({ d, fill, pathRef, mouseX, mouseY }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const springConfig = { damping: 30, stiffness: 200, mass: 0.5 };
+  const springConfig = { damping: 30, stiffness: 200, mass: 0.1 };
   const springX = useSpring(x, springConfig);
   const springY = useSpring(y, springConfig);
 
@@ -41,7 +41,7 @@ const StickyPath = ({ d, fill, pathRef, mouseX, mouseY }) => {
       const dy = mouseY.get() - centerY;
 
       const distance = Math.sqrt(dx * dx + dy * dy);
-      const maxDistance = 200;
+      const maxDistance = 300;
 
       if (distance < maxDistance && distance > 0) {
         const force = (maxDistance - distance) / maxDistance;
