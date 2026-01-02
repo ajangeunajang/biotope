@@ -1,8 +1,9 @@
 'use client';
-import { useState, useEffect, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Head from 'next/head';
 import Image from 'next/image';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 // Lazy loading 컴포넌트들
 const About = lazy(() => import('./components/About'));
@@ -18,6 +19,132 @@ const LoadingFallback = () => (
     </div>
   </div>
 );
+
+// 개별 Path 컴포넌트
+const StickyPath = ({ d, fill, pathRef, mouseX, mouseY }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 30, stiffness: 200, mass: 0.5 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  useEffect(() => {
+    if (!pathRef?.current) return;
+
+    const updatePosition = () => {
+      const bbox = pathRef.current.getBBox();
+      const centerX = bbox.x + bbox.width / 2;
+      const centerY = bbox.y + bbox.height / 2;
+
+      const dx = mouseX.get() - centerX;
+      const dy = mouseY.get() - centerY;
+
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const maxDistance = 200;
+
+      if (distance < maxDistance && distance > 0) {
+        const force = (maxDistance - distance) / maxDistance;
+        const moveX = (dx / distance) * force * 30;
+        const moveY = (dy / distance) * force * 30;
+
+        x.set(moveX);
+        y.set(moveY);
+      } else {
+        x.set(0);
+        y.set(0);
+      }
+    };
+
+    const unsubscribeX = mouseX.on('change', updatePosition);
+    const unsubscribeY = mouseY.on('change', updatePosition);
+
+    return () => {
+      unsubscribeX();
+      unsubscribeY();
+    };
+  }, [pathRef, mouseX, mouseY, x, y]);
+
+  return (
+    <motion.path
+      ref={pathRef}
+      d={d}
+      fill={fill}
+      style={{
+        x: springX,
+        y: springY,
+      }}
+    />
+  );
+};
+
+// Sticky Cursor SVG 컴포넌트
+const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width, height }) => {
+  const svgRef = useRef(null);
+  const pathRefs = useRef([]);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e) => {
+    if (!svgRef.current) return;
+
+    const rect = svgRef.current.getBoundingClientRect();
+    const svgX = e.clientX - rect.left;
+    const svgY = e.clientY - rect.top;
+
+    const viewBoxValues = viewBox.split(' ').map(Number);
+    const scaleX = viewBoxValues[2] / rect.width;
+    const scaleY = viewBoxValues[3] / rect.height;
+
+    mouseX.set(svgX * scaleX);
+    mouseY.set(svgY * scaleY);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(-9999);
+    mouseY.set(-9999);
+  };
+
+  const enhancedChildren = Array.isArray(children)
+    ? children.map((child, index) => {
+        if (child?.type === 'path') {
+          if (!pathRefs.current[index]) {
+            pathRefs.current[index] = { current: null };
+          }
+          return (
+            <StickyPath
+              key={index}
+              d={child.props.d}
+              fill={child.props.fill}
+              pathRef={pathRefs.current[index]}
+              mouseX={mouseX}
+              mouseY={mouseY}
+            />
+          );
+        }
+        return child;
+      })
+    : children;
+
+  return (
+    <svg
+      ref={svgRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      className={className}
+      viewBox={viewBox}
+      width={width}
+      height={height}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ overflow: 'visible' }}
+    >
+      {enhancedChildren}
+    </svg>
+  );
+};
 
 // SearchParams를 사용하는 컴포넌트를 별도로 분리
 function HomeContent() {
@@ -241,21 +368,19 @@ function HomeContent() {
           </div>
 
           <nav
-            className={`fixed w-auto top-2 lg:top-0 p-4 transition-all duration-600 ${
+            className={`fixed w-auto top-2 lg:top-0 p-4 transition-all duration-600 overflow-visible ${
               currentPage === "" ? "left-1/2 -translate-x-1/2" : "left-0"
             }`}
           >
-            <ul>
+            <ul className="overflow-visible">
               <li
-                className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh]`}
+                className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}
               >
-                <svg
+                <StickySVG
                   width="359"
                   height="141"
                   viewBox="0 0 359 141"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-full w-auto relative transition-all duration-400 ease-in-out ${
+                  className={`h-full w-auto relative transition-all duration-200 ease-in-out ${
                     currentPage === "about"
                       ? "invert sm:sm:blur-xs"
                       : " hover:invert hover:sm:blur-xs"
@@ -287,18 +412,16 @@ function HomeContent() {
                     d="M46.2122 2.36511L61.2236 137.972H52.2365L46.9035 90.9824C45.2246 76.6334 38.7065 67.0148 30.6082 67.0148C22.6087 67.0148 16.0906 76.6334 14.4117 90.9824L9.07872 137.972H-0.00714111L15.103 2.36511H46.2122ZM40.978 37.8436V33.1131C40.978 23.1791 36.8301 16.5565 30.6082 16.5565C24.3864 16.5565 20.2385 23.1791 20.2385 33.1131V37.8436C20.2385 47.7776 24.3864 54.4002 30.6082 54.4002C36.8301 54.4002 40.978 47.7776 40.978 37.8436Z"
                     fill="black"
                   />
-                </svg>
+                </StickySVG>
               </li>
               <li
-                className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh]`}
+                className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}
               >
-                <svg
+                <StickySVG
                   width="523"
                   height="142"
                   viewBox="0 0 523 142"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${
+                  className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${
                     currentPage === ""
                       ? "left-1/2 -translate-x-1/2"
                       : "left-0 -translate-x-0"
@@ -342,16 +465,14 @@ function HomeContent() {
                     d="M24.4376 81.9029H21.4748C14.3641 81.9029 9.6237 89.4717 9.6237 100.825V138.668H0.735352V3.06189H24.4376C39.2515 3.06189 49.1274 18.8301 49.1274 42.4824C49.1274 66.1347 39.2515 81.9029 24.4376 81.9029ZM40.2391 42.4824C40.2391 27.3449 33.9185 17.2533 24.4376 17.2533C14.9567 17.2533 8.63611 27.3449 8.63611 42.4824C8.63611 57.6199 14.9567 67.7115 24.4376 67.7115C33.9185 67.7115 40.2391 57.6199 40.2391 42.4824Z"
                     fill="black"
                   />
-                </svg>
+                </StickySVG>
               </li>
-              <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] lg:h-[16vh]`}>
-                <svg
+              <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}>
+                <StickySVG
                   width="203"
                   height="136"
                   viewBox="0 0 203 136"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={`h-full w-auto relative transition-all duration-400 delay-200 ease-in-out ${
+                  className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${
                     currentPage === "lab"
                       ? "invert sm:blur-xs"
                       : " hover:invert hover:blur-xs"
@@ -375,7 +496,7 @@ function HomeContent() {
                     d="M9.7952 0.393433V99.7331C9.7952 112.978 15.3257 121.809 23.6215 121.809H51.2741V136H0.90686V0.393433H9.7952Z"
                     fill="black"
                   />
-                </svg>
+                </StickySVG>
               </li>
             </ul>
           </nav>
