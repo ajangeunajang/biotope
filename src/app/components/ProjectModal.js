@@ -191,9 +191,9 @@ export default function ProjectModal() {
                   </div>
                 </div>
               ) : project ? (
-                <div className="fixed top-0 left-0 flex h-screen w-[100vw]">
+                <div className="flex h-full w-full lg:h-screen">
                   {/* LEFT - Fixed */}
-                  <section className={` ${!project.images ? "lg:w-1/3" : "lg:flex-1"} overflow-scroll overflow-x-hidden w-full min-w-[400px] lg:max-w-1/2 h-full z-50 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start`}>
+                  <section className={` ${!project.images ? "lg:w-1/3" : "lg:flex-1"} overflow-scroll overflow-x-hidden w-full lg:min-w-[400px] lg:max-w-1/2 h-full z-10 p-4 lg:p-8 lg:pr-0 flex flex-col gap-4 lg:gap-20 justify-start items-start`}>
                     
                     {/* Mobile Gallery */}
                     <div className={` ${!project.images ? "hidden" : ""} lg:hidden w-full aspect-[4/3]`}>
