@@ -122,23 +122,23 @@ const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width,
 
   const enhancedChildren = Array.isArray(children)
     ? children.map((child, index) => {
-        if (child?.type === 'path') {
-          if (!pathRefs.current[index]) {
-            pathRefs.current[index] = { current: null };
-          }
-          return (
-            <StickyPath
-              key={index}
-              d={child.props.d}
-              fill={child.props.fill}
-              pathRef={pathRefs.current[index]}
-              mouseX={mouseX}
-              mouseY={mouseY}
-            />
-          );
+      if (child?.type === 'path') {
+        if (!pathRefs.current[index]) {
+          pathRefs.current[index] = { current: null };
         }
-        return child;
-      })
+        return (
+          <StickyPath
+            key={index}
+            d={child.props.d}
+            fill={child.props.fill}
+            pathRef={pathRefs.current[index]}
+            mouseX={mouseX}
+            mouseY={mouseY}
+          />
+        );
+      }
+      return child;
+    })
     : children;
 
   return (
@@ -166,8 +166,19 @@ function HomeContent() {
   const [currentPage, setCurrentPage] = useState('');
   const [preloadedComponents, setPreloadedComponents] = useState(new Set());
   const [isNightMode, setIsNightMode] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  // 스크롤 이벤트 감지
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // URL 파라미터와 상태 동기화
   useEffect(() => {
@@ -244,6 +255,10 @@ function HomeContent() {
 
   const metadata = getPageMetadata();
 
+  // 푸터 높이와 로고 이동 거리 계산
+  const footerHeight = 50; // 푸터 높이 (px)
+  const logoOffset = Math.min(scrollY, footerHeight);
+
   return (
     <>
       <Head>
@@ -254,15 +269,17 @@ function HomeContent() {
         <meta name="twitter:title" content={metadata.title} />
         <meta name="twitter:description" content={metadata.description} />
       </Head>
-      <div>
+      <div
+        className="h-[calc(100vh+50px)]"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
         <div
-          className={`fixed top-0 right-0 overflow-hidden transition-all duration-800 ${
-            currentPage === "about"
-              ? `w-2/3 h-3/4 m-4 rounded-4xl lg:rounded-[100px] bg-[#C1FF00]`
-              : currentPage === "lab"
-                ? "w-full h-full bg-[#A6A6A6]"
-                : "w-full h-full bg-[#C1FF00]"
-          }`}
+          className={`fixed top-0 right-0 overflow-hidden transition-all duration-800 ${currentPage === "about"
+            ? `w-2/3 h-3/4 m-4 rounded-4xl lg:rounded-[100px] bg-[#C1FF00]`
+            : currentPage === "lab"
+              ? "w-full h-full bg-[#A6A6A6]"
+              : "w-full h-full bg-[#C1FF00]"
+            }`}
         >
           {/* Light mode image layer */}
           <Image
@@ -270,13 +287,12 @@ function HomeContent() {
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top transition-opacity duration-[1500ms] ease-in-out ${
-              currentPage === "lab"
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top transition-opacity duration-[1500ms] ease-in-out ${currentPage === "lab"
+              ? "opacity-0"
+              : isNightMode
                 ? "opacity-0"
-                : isNightMode
-                  ? "opacity-0"
-                  : "opacity-100"
-            }`}
+                : "opacity-100"
+              }`}
           />
           {/* Night mode image layer */}
           <Image
@@ -284,22 +300,20 @@ function HomeContent() {
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top blur-xs lg:blur-sm transition-opacity duration-[1500ms] ease-in-out ${
-              currentPage === "lab"
-                ? "opacity-0"
-                : isNightMode
-                  ? "opacity-100"
-                  : "opacity-0"
-            }`}
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top blur-xs lg:blur-sm transition-opacity duration-[1500ms] ease-in-out ${currentPage === "lab"
+              ? "opacity-0"
+              : isNightMode
+                ? "opacity-100"
+                : "opacity-0"
+              }`}
           />
         </div>
         <main className="relative">
           <div
-            className={`w-full h-full fixed transition-all duration-1200 ease-in-out ${
-              currentPage === "about"
-                ? "opacity-100 blur-0"
-                : "opacity-0 blur-2xl"
-            }`}
+            className={`w-full h-full fixed transition-all duration-1200 ease-in-out ${currentPage === "about"
+              ? "opacity-100 blur-0"
+              : "opacity-0 blur-2xl"
+              }`}
           >
             {currentPage === "about" && (
               <Suspense fallback={<LoadingFallback />}>
@@ -309,11 +323,10 @@ function HomeContent() {
           </div>
 
           <div
-            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${
-              currentPage === "projects"
-                ? "opacity-100 transform translate-x-0"
-                : "opacity-0 transform translate-x-full absolute inset-0"
-            }`}
+            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${currentPage === "projects"
+              ? "opacity-100 transform translate-x-0"
+              : "opacity-0 transform translate-x-full absolute inset-0"
+              }`}
           >
             {currentPage === "projects" && (
               <Suspense fallback={<LoadingFallback />}>
@@ -323,11 +336,10 @@ function HomeContent() {
           </div>
 
           <div
-            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${
-              currentPage === "lab"
-                ? "opacity-100 transform translate-x-0"
-                : "opacity-0 transform translate-x-full absolute inset-0"
-            }`}
+            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${currentPage === "lab"
+              ? "opacity-100 transform translate-x-0"
+              : "opacity-0 transform translate-x-full absolute inset-0"
+              }`}
           >
             {currentPage === "lab" && (
               <Suspense fallback={<LoadingFallback />}>
@@ -361,18 +373,20 @@ function HomeContent() {
 
         <header className="fixed">
           {/* logo container */}
-          <div className="fixed bottom-0 left-1/2 -translate-x-1/2 p-2 lg:p-4">
+          <div
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 p-2 lg:p-4 transition-transform duration-200"
+            style={{ transform: `translateY(-${logoOffset}px)` }}
+          >
             <svg
               width="532"
               height="344"
               viewBox="0 0 532 344"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${
-                currentPage !== ""
-                  ? "hover:blur-md hover:invert"
-                  : "invert blur-xs"
-              }`}
+              className={`max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${currentPage !== ""
+                ? "hover:blur-md hover:invert"
+                : "invert blur-xs"
+                }`}
               onClick={() => handlePageChange("")}
             >
               <path
@@ -382,140 +396,152 @@ function HomeContent() {
             </svg>
           </div>
 
-          <nav
-            className={`fixed w-auto top-2 lg:top-0 p-4 transition-all duration-600 overflow-visible ${
-              currentPage === "" ? "left-1/2 -translate-x-1/2" : "left-0"
-            }`}
+          {/* Footer - 로고와 같은 너비로 아래에서 올라옴 */}
+          <footer
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 py-2 lg:py-4 w-auto transition-transform duration-200"
+            style={{ transform: `translateY(${footerHeight - logoOffset}px)` }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <ul className="overflow-visible">
-              <li
-                className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}
-              >
-                <StickySVG
-                  width="359"
-                  height="141"
-                  viewBox="0 0 359 141"
-                  className={`h-full w-auto relative transition-all duration-200 ease-in-out ${
-                    currentPage === "about"
-                      ? "invert sm:sm:blur-xs"
-                      : " hover:invert hover:sm:blur-xs"
-                  } ${
-                    currentPage === ""
-                      ? "left-1/2 -translate-x-1/2"
-                      : "left-0 -translate-x-0"
-                  }`}
-                  onClick={() => handlePageChange("about")}
-                  onMouseEnter={() => handleMouseEnter("about")}
-                >
-                  <path
-                    d="M358.127 2.36511V16.5565H341.338C334.227 16.5565 329.486 24.1252 329.486 35.4783V137.972H320.598V35.4783C320.598 24.1252 315.858 16.5565 308.747 16.5565H291.958V2.36511H358.127Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M272.653 2.36511H281.542V97.7628C281.542 123.307 270.876 140.337 254.877 140.337C238.878 140.337 228.212 123.307 228.212 97.7628V2.36511H237.1V97.7628C237.1 114.792 244.211 126.146 254.877 126.146C265.543 126.146 272.653 114.792 272.653 97.7628V2.36511Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M184.245 0C200.244 0 210.91 17.0297 210.91 42.5742V97.7629C210.91 123.307 200.244 140.337 184.245 140.337C168.246 140.337 157.58 123.307 157.58 97.7629V42.5742C157.58 17.0297 168.246 0 184.245 0ZM202.021 97.7629V42.5742C202.021 25.5445 194.911 14.1914 184.245 14.1914C173.579 14.1914 166.468 25.5445 166.468 42.5742V97.7629C166.468 114.793 173.579 126.146 184.245 126.146C194.911 126.146 202.021 114.793 202.021 97.7629Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M120.005 59.1307C134.819 59.1307 144.695 74.8989 144.695 98.5512C144.695 122.203 134.819 137.972 120.005 137.972H75.563V2.36511H120.005V59.1307ZM97.7838 14.9797C89.1918 14.9797 83.4637 24.1252 83.4637 37.8436C83.4637 51.5619 89.1918 60.7075 97.7838 60.7075C106.376 60.7075 112.104 51.5619 112.104 37.8436C112.104 24.1252 106.376 14.9797 97.7838 14.9797ZM99.2652 123.78H120.005C129.486 123.78 135.806 113.689 135.806 98.5512C135.806 83.4137 129.486 73.322 120.005 73.322H99.2652C89.7843 73.322 83.4637 83.4137 83.4637 98.5512C83.4637 113.689 89.7843 123.78 99.2652 123.78Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M46.2122 2.36511L61.2236 137.972H52.2365L46.9035 90.9824C45.2246 76.6334 38.7065 67.0148 30.6082 67.0148C22.6087 67.0148 16.0906 76.6334 14.4117 90.9824L9.07872 137.972H-0.00714111L15.103 2.36511H46.2122ZM40.978 37.8436V33.1131C40.978 23.1791 36.8301 16.5565 30.6082 16.5565C24.3864 16.5565 20.2385 23.1791 20.2385 33.1131V37.8436C20.2385 47.7776 24.3864 54.4002 30.6082 54.4002C36.8301 54.4002 40.978 47.7776 40.978 37.8436Z"
-                    fill="black"
-                  />
-                </StickySVG>
-              </li>
-              <li
-                className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}
-              >
-                <StickySVG
-                  width="523"
-                  height="142"
-                  viewBox="0 0 523 142"
-                  className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${
-                    currentPage === ""
-                      ? "left-1/2 -translate-x-1/2"
-                      : "left-0 -translate-x-0"
-                  } ${
-                    currentPage === "projects"
-                      ? "invert sm:sm:blur-xs"
-                      : " hover:invert hover:sm:blur-xs"
-                  }`}
-                  onClick={() => handlePageChange("projects")}
-                  onMouseEnter={() => handleMouseEnter("projects")}
-                >
-                  <path
-                    d="M497.047 74.0188C483.715 74.0188 474.827 59.8274 474.827 38.5404C474.827 17.2533 483.715 3.06189 497.047 3.06189H522.725V17.2533H497.047C489.048 17.2533 483.715 25.7681 483.715 38.5404C483.715 51.3126 489.048 59.8274 497.047 59.8274H522.725V138.668H478.777V124.477H499.023C508.504 124.477 514.824 114.385 514.824 99.248C514.824 84.1105 508.504 74.0188 499.023 74.0188H497.047Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M469.352 3.06189V17.2533H452.563C445.453 17.2533 440.712 24.822 440.712 36.1751V138.668H431.824V36.1751C431.824 24.822 427.083 17.2533 419.973 17.2533H403.184V3.06189H469.352Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M371.083 126.842C381.749 126.842 388.86 115.489 388.86 98.4596H397.748C397.748 124.004 387.082 141.034 371.083 141.034C355.084 141.034 344.418 124.004 344.418 98.4596V43.2708C344.418 17.7263 355.084 0.696655 371.083 0.696655C387.082 0.696655 397.748 17.7263 397.748 43.2708H388.86C388.86 26.2412 381.749 14.8881 371.083 14.8881C360.417 14.8881 353.306 26.2412 353.306 43.2708V98.4596C353.306 115.489 360.417 126.842 371.083 126.842Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M304.949 17.2533C296.949 17.2533 291.616 25.7681 291.616 38.5404C291.616 51.3126 296.949 59.8274 304.949 59.8274H329.145V74.0188H304.949C297.542 74.0188 292.604 81.9029 292.604 93.7291V104.767C292.604 116.593 297.542 124.477 304.949 124.477H329.145V138.668H283.716V3.06189H329.145V17.2533H304.949Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M263.925 3.06189V101.613C263.925 125.266 254.049 141.034 239.235 141.034C224.421 141.034 214.545 125.266 214.545 101.613H223.434C223.434 116.751 229.754 126.842 239.235 126.842C248.716 126.842 255.037 116.751 255.037 101.613V36.1751C255.037 24.822 250.296 17.2533 243.186 17.2533H223.434V3.06189H263.925Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M174.529 0.696655C190.528 0.696655 201.194 17.7263 201.194 43.2708V98.4596C201.194 124.004 190.528 141.034 174.529 141.034C158.53 141.034 147.864 124.004 147.864 98.4596V43.2708C147.864 17.7263 158.53 0.696655 174.529 0.696655ZM192.305 98.4596V43.2708C192.305 26.2412 185.195 14.8881 174.529 14.8881C163.863 14.8881 156.752 26.2412 156.752 43.2708V98.4596C156.752 115.489 163.863 126.842 174.529 126.842C185.195 126.842 192.305 115.489 192.305 98.4596Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M108.348 59.8274C123.162 59.8274 133.038 75.5956 133.038 99.248V138.668H124.15V99.248C124.15 84.1105 117.829 74.0188 108.348 74.0188H88.5966C79.1157 74.0188 72.7951 84.1105 72.7951 99.248V138.668H63.9067V3.06189H108.348V59.8274ZM86.1276 61.4043C94.7197 61.4043 100.448 52.2587 100.448 38.5404C100.448 24.822 94.7197 15.6765 86.1276 15.6765C77.5355 15.6765 71.8075 24.822 71.8075 38.5404C71.8075 52.2587 77.5355 61.4043 86.1276 61.4043Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M24.4376 81.9029H21.4748C14.3641 81.9029 9.6237 89.4717 9.6237 100.825V138.668H0.735352V3.06189H24.4376C39.2515 3.06189 49.1274 18.8301 49.1274 42.4824C49.1274 66.1347 39.2515 81.9029 24.4376 81.9029ZM40.2391 42.4824C40.2391 27.3449 33.9185 17.2533 24.4376 17.2533C14.9567 17.2533 8.63611 27.3449 8.63611 42.4824C8.63611 57.6199 14.9567 67.7115 24.4376 67.7115C33.9185 67.7115 40.2391 57.6199 40.2391 42.4824Z"
-                    fill="black"
-                  />
-                </StickySVG>
-              </li>
-              <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}>
-                <StickySVG
-                  width="203"
-                  height="136"
-                  viewBox="0 0 203 136"
-                  className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${
-                    currentPage === "lab"
-                      ? "invert sm:blur-xs"
-                      : " hover:invert hover:blur-xs"
-                  }  ${
-                    currentPage === ""
-                      ? "left-1/2 -translate-x-1/2"
-                      : "left-0 -translate-x-0"
-                  }`}
-                  onClick={() => handlePageChange("lab")}
-                  onMouseEnter={() => handleMouseEnter("lab")}
-                >
-                  <path
-                    d="M178.164 57.159C192.978 57.159 202.854 72.9272 202.854 96.5795C202.854 120.232 192.978 136 178.164 136H133.723V0.393433H178.164V57.159ZM155.944 13.008C147.351 13.008 141.623 22.1536 141.623 35.8719C141.623 49.5902 147.351 58.7358 155.944 58.7358C164.536 58.7358 170.264 49.5902 170.264 35.8719C170.264 22.1536 164.536 13.008 155.944 13.008ZM157.425 121.809H178.164C187.645 121.809 193.966 111.717 193.966 96.5795C193.966 81.442 187.645 71.3504 178.164 71.3504H157.425C147.944 71.3504 141.623 81.442 141.623 96.5795C141.623 111.717 147.944 121.809 157.425 121.809Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M104.372 0.393433L119.383 136H110.396L105.063 89.0108C103.384 74.6617 96.8661 65.0431 88.7679 65.0431C80.7683 65.0431 74.2502 74.6617 72.5713 89.0108L67.2383 136H58.1525L73.2626 0.393433H104.372ZM99.1376 35.8719V31.1414C99.1376 21.2075 94.9897 14.5848 88.7679 14.5848C82.546 14.5848 78.3981 21.2075 78.3981 31.1414V35.8719C78.3981 45.8059 82.546 52.4285 88.7679 52.4285C94.9897 52.4285 99.1376 45.8059 99.1376 35.8719Z"
-                    fill="black"
-                  />
-                  <path
-                    d="M9.7952 0.393433V99.7331C9.7952 112.978 15.3257 121.809 23.6215 121.809H51.2741V136H0.90686V0.393433H9.7952Z"
-                    fill="black"
-                  />
-                </StickySVG>
-              </li>
-            </ul>
-          </nav>
+            <div className="w-[520px] text-black text-sm lg:text-lg flex-wrap flex flex-col lg:flex-row gap-1 lg:gap-4 items-center justify-center">
+              <span className="scale-x-[0.6] -mx-4">© 2026 biotope</span>
+              <span className="scale-x-[0.6] -mx-4">서울특별시 성북구 고려대로7길 4</span>
+              <span className="scale-x-[0.6] -mx-4">070-4571-9907</span>
+              <a href='https://www.instagram.com/biotopelab/' target='_blank' rel='noopener noreferrer' className='pl-8'>
+                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.0244 0C14.1647 0.0274236 15.8916 1.79286 15.8916 3.96582V12.2471C15.8644 14.4133 14.121 16.1609 11.9746 16.1611H3.91699C1.77056 16.1609 0.027181 14.4133 0 12.2471V3.96582C1.51216e-07 1.79286 1.72693 0.0274234 3.86719 0H12.0244ZM3.91699 1.49609C2.57006 1.49633 1.47852 2.60234 1.47852 3.96582V12.1953C1.47852 13.5588 2.57006 14.6648 3.91699 14.665H11.9746C13.3215 14.6648 14.4131 13.5588 14.4131 12.1953V3.96582C14.4131 2.60234 13.3215 1.49633 11.9746 1.49609H3.91699ZM7.94531 4.04004C10.2511 4.04004 12.1211 5.84967 12.1211 8.08105C12.1208 10.3122 10.2509 12.1211 7.94531 12.1211C5.63994 12.1208 3.77078 10.3121 3.77051 8.08105C3.77051 5.84983 5.63977 4.04029 7.94531 4.04004ZM7.94531 5.50977C6.47823 5.51002 5.28906 6.66124 5.28906 8.08105C5.28933 9.50065 6.4784 10.6511 7.94531 10.6514C9.41245 10.6514 10.6023 9.50081 10.6025 8.08105C10.6025 6.66108 9.41262 5.50977 7.94531 5.50977ZM12.5244 2.69336C12.8962 2.69336 13.1981 3.05489 13.1982 3.50098C13.1982 3.94725 12.8963 4.30957 12.5244 4.30957C12.1527 4.30933 11.8516 3.94711 11.8516 3.50098C11.8517 3.05504 12.1528 2.6936 12.5244 2.69336Z" fill="black" />
+                </svg>
+              </a>
+
+            </div>
+          </footer>
         </header>
+        <nav
+          className={`fixed w-auto top-2 lg:top-0 p-4 transition-all duration-600 overflow-visible ${currentPage === "" ? "left-1/2 -translate-x-1/2" : "left-0"
+            }`}
+        >
+          <ul className="overflow-visible">
+            <li
+              className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}
+            >
+              <StickySVG
+                width="359"
+                height="141"
+                viewBox="0 0 359 141"
+                className={`h-full w-auto relative transition-all duration-200 ease-in-out ${currentPage === "about"
+                  ? "invert sm:sm:blur-xs"
+                  : " hover:invert hover:sm:blur-xs"
+                  } ${currentPage === ""
+                    ? "left-1/2 -translate-x-1/2"
+                    : "left-0 -translate-x-0"
+                  }`}
+                onClick={() => handlePageChange("about")}
+                onMouseEnter={() => handleMouseEnter("about")}
+              >
+                <path
+                  d="M358.127 2.36511V16.5565H341.338C334.227 16.5565 329.486 24.1252 329.486 35.4783V137.972H320.598V35.4783C320.598 24.1252 315.858 16.5565 308.747 16.5565H291.958V2.36511H358.127Z"
+                  fill="black"
+                />
+                <path
+                  d="M272.653 2.36511H281.542V97.7628C281.542 123.307 270.876 140.337 254.877 140.337C238.878 140.337 228.212 123.307 228.212 97.7628V2.36511H237.1V97.7628C237.1 114.792 244.211 126.146 254.877 126.146C265.543 126.146 272.653 114.792 272.653 97.7628V2.36511Z"
+                  fill="black"
+                />
+                <path
+                  d="M184.245 0C200.244 0 210.91 17.0297 210.91 42.5742V97.7629C210.91 123.307 200.244 140.337 184.245 140.337C168.246 140.337 157.58 123.307 157.58 97.7629V42.5742C157.58 17.0297 168.246 0 184.245 0ZM202.021 97.7629V42.5742C202.021 25.5445 194.911 14.1914 184.245 14.1914C173.579 14.1914 166.468 25.5445 166.468 42.5742V97.7629C166.468 114.793 173.579 126.146 184.245 126.146C194.911 126.146 202.021 114.793 202.021 97.7629Z"
+                  fill="black"
+                />
+                <path
+                  d="M120.005 59.1307C134.819 59.1307 144.695 74.8989 144.695 98.5512C144.695 122.203 134.819 137.972 120.005 137.972H75.563V2.36511H120.005V59.1307ZM97.7838 14.9797C89.1918 14.9797 83.4637 24.1252 83.4637 37.8436C83.4637 51.5619 89.1918 60.7075 97.7838 60.7075C106.376 60.7075 112.104 51.5619 112.104 37.8436C112.104 24.1252 106.376 14.9797 97.7838 14.9797ZM99.2652 123.78H120.005C129.486 123.78 135.806 113.689 135.806 98.5512C135.806 83.4137 129.486 73.322 120.005 73.322H99.2652C89.7843 73.322 83.4637 83.4137 83.4637 98.5512C83.4637 113.689 89.7843 123.78 99.2652 123.78Z"
+                  fill="black"
+                />
+                <path
+                  d="M46.2122 2.36511L61.2236 137.972H52.2365L46.9035 90.9824C45.2246 76.6334 38.7065 67.0148 30.6082 67.0148C22.6087 67.0148 16.0906 76.6334 14.4117 90.9824L9.07872 137.972H-0.00714111L15.103 2.36511H46.2122ZM40.978 37.8436V33.1131C40.978 23.1791 36.8301 16.5565 30.6082 16.5565C24.3864 16.5565 20.2385 23.1791 20.2385 33.1131V37.8436C20.2385 47.7776 24.3864 54.4002 30.6082 54.4002C36.8301 54.4002 40.978 47.7776 40.978 37.8436Z"
+                  fill="black"
+                />
+              </StickySVG>
+            </li>
+            <li
+              className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}
+            >
+              <StickySVG
+                width="523"
+                height="142"
+                viewBox="0 0 523 142"
+                className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${currentPage === ""
+                  ? "left-1/2 -translate-x-1/2"
+                  : "left-0 -translate-x-0"
+                  } ${currentPage === "projects"
+                    ? "invert sm:sm:blur-xs"
+                    : " hover:invert hover:sm:blur-xs"
+                  }`}
+                onClick={() => handlePageChange("projects")}
+                onMouseEnter={() => handleMouseEnter("projects")}
+              >
+                <path
+                  d="M497.047 74.0188C483.715 74.0188 474.827 59.8274 474.827 38.5404C474.827 17.2533 483.715 3.06189 497.047 3.06189H522.725V17.2533H497.047C489.048 17.2533 483.715 25.7681 483.715 38.5404C483.715 51.3126 489.048 59.8274 497.047 59.8274H522.725V138.668H478.777V124.477H499.023C508.504 124.477 514.824 114.385 514.824 99.248C514.824 84.1105 508.504 74.0188 499.023 74.0188H497.047Z"
+                  fill="black"
+                />
+                <path
+                  d="M469.352 3.06189V17.2533H452.563C445.453 17.2533 440.712 24.822 440.712 36.1751V138.668H431.824V36.1751C431.824 24.822 427.083 17.2533 419.973 17.2533H403.184V3.06189H469.352Z"
+                  fill="black"
+                />
+                <path
+                  d="M371.083 126.842C381.749 126.842 388.86 115.489 388.86 98.4596H397.748C397.748 124.004 387.082 141.034 371.083 141.034C355.084 141.034 344.418 124.004 344.418 98.4596V43.2708C344.418 17.7263 355.084 0.696655 371.083 0.696655C387.082 0.696655 397.748 17.7263 397.748 43.2708H388.86C388.86 26.2412 381.749 14.8881 371.083 14.8881C360.417 14.8881 353.306 26.2412 353.306 43.2708V98.4596C353.306 115.489 360.417 126.842 371.083 126.842Z"
+                  fill="black"
+                />
+                <path
+                  d="M304.949 17.2533C296.949 17.2533 291.616 25.7681 291.616 38.5404C291.616 51.3126 296.949 59.8274 304.949 59.8274H329.145V74.0188H304.949C297.542 74.0188 292.604 81.9029 292.604 93.7291V104.767C292.604 116.593 297.542 124.477 304.949 124.477H329.145V138.668H283.716V3.06189H329.145V17.2533H304.949Z"
+                  fill="black"
+                />
+                <path
+                  d="M263.925 3.06189V101.613C263.925 125.266 254.049 141.034 239.235 141.034C224.421 141.034 214.545 125.266 214.545 101.613H223.434C223.434 116.751 229.754 126.842 239.235 126.842C248.716 126.842 255.037 116.751 255.037 101.613V36.1751C255.037 24.822 250.296 17.2533 243.186 17.2533H223.434V3.06189H263.925Z"
+                  fill="black"
+                />
+                <path
+                  d="M174.529 0.696655C190.528 0.696655 201.194 17.7263 201.194 43.2708V98.4596C201.194 124.004 190.528 141.034 174.529 141.034C158.53 141.034 147.864 124.004 147.864 98.4596V43.2708C147.864 17.7263 158.53 0.696655 174.529 0.696655ZM192.305 98.4596V43.2708C192.305 26.2412 185.195 14.8881 174.529 14.8881C163.863 14.8881 156.752 26.2412 156.752 43.2708V98.4596C156.752 115.489 163.863 126.842 174.529 126.842C185.195 126.842 192.305 115.489 192.305 98.4596Z"
+                  fill="black"
+                />
+                <path
+                  d="M108.348 59.8274C123.162 59.8274 133.038 75.5956 133.038 99.248V138.668H124.15V99.248C124.15 84.1105 117.829 74.0188 108.348 74.0188H88.5966C79.1157 74.0188 72.7951 84.1105 72.7951 99.248V138.668H63.9067V3.06189H108.348V59.8274ZM86.1276 61.4043C94.7197 61.4043 100.448 52.2587 100.448 38.5404C100.448 24.822 94.7197 15.6765 86.1276 15.6765C77.5355 15.6765 71.8075 24.822 71.8075 38.5404C71.8075 52.2587 77.5355 61.4043 86.1276 61.4043Z"
+                  fill="black"
+                />
+                <path
+                  d="M24.4376 81.9029H21.4748C14.3641 81.9029 9.6237 89.4717 9.6237 100.825V138.668H0.735352V3.06189H24.4376C39.2515 3.06189 49.1274 18.8301 49.1274 42.4824C49.1274 66.1347 39.2515 81.9029 24.4376 81.9029ZM40.2391 42.4824C40.2391 27.3449 33.9185 17.2533 24.4376 17.2533C14.9567 17.2533 8.63611 27.3449 8.63611 42.4824C8.63611 57.6199 14.9567 67.7115 24.4376 67.7115C33.9185 67.7115 40.2391 57.6199 40.2391 42.4824Z"
+                  fill="black"
+                />
+              </StickySVG>
+            </li>
+            <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}>
+              <StickySVG
+                width="203"
+                height="136"
+                viewBox="0 0 203 136"
+                className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${currentPage === "lab"
+                  ? "invert sm:blur-xs"
+                  : " hover:invert hover:blur-xs"
+                  }  ${currentPage === ""
+                    ? "left-1/2 -translate-x-1/2"
+                    : "left-0 -translate-x-0"
+                  }`}
+                onClick={() => handlePageChange("lab")}
+                onMouseEnter={() => handleMouseEnter("lab")}
+              >
+                <path
+                  d="M178.164 57.159C192.978 57.159 202.854 72.9272 202.854 96.5795C202.854 120.232 192.978 136 178.164 136H133.723V0.393433H178.164V57.159ZM155.944 13.008C147.351 13.008 141.623 22.1536 141.623 35.8719C141.623 49.5902 147.351 58.7358 155.944 58.7358C164.536 58.7358 170.264 49.5902 170.264 35.8719C170.264 22.1536 164.536 13.008 155.944 13.008ZM157.425 121.809H178.164C187.645 121.809 193.966 111.717 193.966 96.5795C193.966 81.442 187.645 71.3504 178.164 71.3504H157.425C147.944 71.3504 141.623 81.442 141.623 96.5795C141.623 111.717 147.944 121.809 157.425 121.809Z"
+                  fill="black"
+                />
+                <path
+                  d="M104.372 0.393433L119.383 136H110.396L105.063 89.0108C103.384 74.6617 96.8661 65.0431 88.7679 65.0431C80.7683 65.0431 74.2502 74.6617 72.5713 89.0108L67.2383 136H58.1525L73.2626 0.393433H104.372ZM99.1376 35.8719V31.1414C99.1376 21.2075 94.9897 14.5848 88.7679 14.5848C82.546 14.5848 78.3981 21.2075 78.3981 31.1414V35.8719C78.3981 45.8059 82.546 52.4285 88.7679 52.4285C94.9897 52.4285 99.1376 45.8059 99.1376 35.8719Z"
+                  fill="black"
+                />
+                <path
+                  d="M9.7952 0.393433V99.7331C9.7952 112.978 15.3257 121.809 23.6215 121.809H51.2741V136H0.90686V0.393433H9.7952Z"
+                  fill="black"
+                />
+              </StickySVG>
+            </li>
+          </ul>
+        </nav>
+
       </div>
     </>
   );
