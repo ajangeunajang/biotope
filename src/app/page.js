@@ -383,7 +383,7 @@ function HomeContent() {
               viewBox="0 0 532 344"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${currentPage !== ""
+              className={`max-w-[100vw] max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${currentPage !== ""
                 ? "hover:blur-md hover:invert"
                 : "invert blur-xs"
                 }`}
@@ -403,15 +403,14 @@ function HomeContent() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <div className="w-[520px] max-w-[100vw] text-black text-sm lg:text-lg flex-wrap flex flex-row gap-2 items-center justify-center">
-              <span className="scale-x-[0.6] -mx-4">© 2026 biotope</span>
-              <span className="scale-x-[0.6] -mx-4">서울특별시 성북구 고려대로7길 4</span>
-              <span className="scale-x-[0.6] -mx-4">070-4571-9907</span>
+              <span className="scale-x-[0.6] -mx-6 sm:-mx-4">© 2026 biotope</span>
+              <span className="scale-x-[0.6] -mx-6 sm:-mx-4">서울특별시 성북구 고려대로7길 4</span>
+              <span className="scale-x-[0.6] -mx-6 sm:-mx-4">070-4571-9907</span>
               <a href='https://www.instagram.com/biotopelab/' target='_blank' rel='noopener noreferrer' className='pl-8'>
                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12.0244 0C14.1647 0.0274236 15.8916 1.79286 15.8916 3.96582V12.2471C15.8644 14.4133 14.121 16.1609 11.9746 16.1611H3.91699C1.77056 16.1609 0.027181 14.4133 0 12.2471V3.96582C1.51216e-07 1.79286 1.72693 0.0274234 3.86719 0H12.0244ZM3.91699 1.49609C2.57006 1.49633 1.47852 2.60234 1.47852 3.96582V12.1953C1.47852 13.5588 2.57006 14.6648 3.91699 14.665H11.9746C13.3215 14.6648 14.4131 13.5588 14.4131 12.1953V3.96582C14.4131 2.60234 13.3215 1.49633 11.9746 1.49609H3.91699ZM7.94531 4.04004C10.2511 4.04004 12.1211 5.84967 12.1211 8.08105C12.1208 10.3122 10.2509 12.1211 7.94531 12.1211C5.63994 12.1208 3.77078 10.3121 3.77051 8.08105C3.77051 5.84983 5.63977 4.04029 7.94531 4.04004ZM7.94531 5.50977C6.47823 5.51002 5.28906 6.66124 5.28906 8.08105C5.28933 9.50065 6.4784 10.6511 7.94531 10.6514C9.41245 10.6514 10.6023 9.50081 10.6025 8.08105C10.6025 6.66108 9.41262 5.50977 7.94531 5.50977ZM12.5244 2.69336C12.8962 2.69336 13.1981 3.05489 13.1982 3.50098C13.1982 3.94725 12.8963 4.30957 12.5244 4.30957C12.1527 4.30933 11.8516 3.94711 11.8516 3.50098C11.8517 3.05504 12.1528 2.6936 12.5244 2.69336Z" fill="black" />
                 </svg>
               </a>
-
             </div>
           </footer>
         </header>
