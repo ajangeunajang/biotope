@@ -52,7 +52,18 @@ export default function About() {
                   <td className="w-12 lg:pr-32 pr-20 align-top">
                     {contact.label}
                   </td>
-                  <td className="deleteunderline !no-underline !decoration-transparent">{contact.value}</td>
+                  <td className="deleteunderline !no-underline !decoration-transparent">
+                    <span style={{
+                      textDecoration: 'none',
+                      WebkitTextDecoration: 'none',
+                      textDecorationLine: 'none',
+                      WebkitTextDecorationLine: 'none',
+                      color: 'inherit',
+                      pointerEvents: 'none'
+                    }}>
+                      {contact.value}
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>

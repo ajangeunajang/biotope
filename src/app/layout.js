@@ -6,6 +6,11 @@ import ProjectModal from './components/ProjectModal';
 export const metadata = {
   title: 'BIOTOPE',
   description: '비오톱',
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
   openGraph: {
     title: 'BIOTOPE',
     description: '비오톱',
