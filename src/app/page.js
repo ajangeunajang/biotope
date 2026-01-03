@@ -268,6 +268,7 @@ function HomeContent() {
         <meta property="og:description" content={metadata.description} />
         <meta name="twitter:title" content={metadata.title} />
         <meta name="twitter:description" content={metadata.description} />
+        <meta name="format-detection" content="telephone=no, email=no, address=no" />
       </Head>
       <div
         className="h-[calc(100vh+40px)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
