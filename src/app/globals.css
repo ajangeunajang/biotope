@@ -24,7 +24,7 @@ body {
   background-color: transparent;}
 
   /* 모바일에서 푸터 텍스트 밑줄 제거 */
-footer *, .deleteunderline {
+footer *, .deleteunderline, {
   text-decoration: none !important;
 }
 
