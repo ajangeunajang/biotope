@@ -5,12 +5,13 @@
   --foreground: #171717;
 }
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
+} */
+
 *{
   word-break: keep-all;
 }
@@ -21,6 +22,11 @@ body {
 *::selection {  
   color: black;  
   background-color: transparent;}
+
+  /* 모바일에서 푸터 텍스트 밑줄 제거 */
+footer * {
+  text-decoration: none !important;
+}
 
 /* Swiper Navigation Styling */
 .swiper-button-next,

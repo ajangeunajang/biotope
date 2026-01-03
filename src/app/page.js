@@ -256,7 +256,7 @@ function HomeContent() {
   const metadata = getPageMetadata();
 
   // 푸터 높이와 로고 이동 거리 계산
-  const footerHeight = 50; // 푸터 높이 (px)
+  const footerHeight = 40; // 푸터 높이 (px)
   const logoOffset = Math.min(scrollY, footerHeight);
 
   return (
@@ -270,7 +270,7 @@ function HomeContent() {
         <meta name="twitter:description" content={metadata.description} />
       </Head>
       <div
-        className="h-[calc(100vh+50px)]"
+        className="h-[calc(100vh+40px)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
         <div
@@ -398,7 +398,7 @@ function HomeContent() {
 
           {/* Footer - 로고와 같은 너비로 아래에서 올라옴 */}
           <footer
-            className="fixed bottom-0 left-1/2 -translate-x-1/2 py-2 lg:py-4 w-auto transition-transform duration-200"
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 pb-2 w-auto transition-transform duration-200"
             style={{ transform: `translateY(${footerHeight - logoOffset}px)` }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >

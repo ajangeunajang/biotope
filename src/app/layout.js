@@ -35,7 +35,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ko" className="bg-[#C1FF00]">
+    <html lang="ko" className="bg-[#C1FF00] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <head>
         {/* 폰트 프리로드 */}
         <link
