@@ -375,7 +375,7 @@ function HomeContent() {
         <header className="fixed">
           {/* logo container */}
           <div
-            className="fixed bottom-0 left-1/2 -translate-x-1/2 p-2 lg:p-4 transition-transform duration-200"
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 p-2 pt-0 pt-0 lg:pt-0 lg:p-4 transition-transform duration-200"
             style={{ transform: `translateY(-${logoOffset}px)` }}
           >
             <svg
