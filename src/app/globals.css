@@ -23,37 +23,6 @@ body {
   color: black;  
   background-color: transparent;}
 
-  /* 모바일에서 푸터 텍스트 밑줄 제거 */
-footer *, .deleteunderline, .deleteunderline * {
-  text-decoration: none !important;
-  -webkit-text-decoration: none !important;
-  text-decoration-line: none !important;
-  -webkit-text-decoration-line: none !important;
-}
-
-/* 모바일에서 자동 감지된 링크 밑줄 제거 */
-a,
-a:link,
-a:visited,
-a:hover,
-a:active {
-  text-decoration: none !important;
-  -webkit-text-decoration: none !important;
-  text-decoration-line: none !important;
-  -webkit-text-decoration-line: none !important;
-}
-
-/* table 내부 링크 밑줄 제거 */
-table a,
-table a:link,
-table a:visited,
-table a:hover,
-table a:active {
-  text-decoration: none !important;
-  -webkit-text-decoration: none !important;
-  border-bottom: none !important;
-}
-
 /* Swiper Navigation Styling */
 .swiper-button-next,
 .swiper-button-prev {
