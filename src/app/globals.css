@@ -24,8 +24,15 @@ body {
   background-color: transparent;}
 
   /* 모바일에서 푸터 텍스트 밑줄 제거 */
-footer *, .deleteunderline, {
+footer *, .deleteunderline, .deleteunderline * {
   text-decoration: none !important;
+  -webkit-text-decoration: none !important;
+}
+
+/* 모바일에서 자동 감지된 링크 밑줄 제거 */
+a {
+  text-decoration: none !important;
+  -webkit-text-decoration: none !important;
 }
 
 /* Swiper Navigation Styling */
