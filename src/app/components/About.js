@@ -52,7 +52,7 @@ export default function About() {
                   <td className="w-12 lg:pr-32 pr-20 align-top">
                     {contact.label}
                   </td>
-                  <td className="">{contact.value}</td>
+                  <td className="deleteunderline">{contact.value}</td>
                 </tr>
               ))}
             </tbody>
