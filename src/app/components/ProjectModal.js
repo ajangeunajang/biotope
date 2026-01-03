@@ -223,8 +223,7 @@ export default function ProjectModal() {
                             slidesPerView={1}
                             pagination={{ clickable: true }}
                             className="w-full h-full"
-                            style={{ isolation: "auto" }}
-                          >
+                           >
                             {project.images.map((image, index) => (
                               <SwiperSlide key={index}>
                                 <div className="relative w-full h-full flex items-center justify-center rounded-4xl lg:rounded-[100px] overflow-hidden">
@@ -235,7 +234,7 @@ export default function ProjectModal() {
                                       .url()}
                                     alt={`${project.title} - 이미지 ${index + 1}`}
                                     fill
-                                    className="objㅇect-contain"
+                                    className="object-contain"
                                     priority={index === 0}
                                   />
                                 </div>
@@ -369,8 +368,7 @@ export default function ProjectModal() {
                           slidesPerView={1}
                           pagination={{ clickable: true }}
                           className="w-full h-full"
-                          style={{ isolation: "auto" }}
-                        >
+                         >
                           {project.images.map((image, index) => (
                             <SwiperSlide key={index}>
                               <div className="relative w-full h-full flex items-center justify-center rounded-4xl lg:rounded-[100px] overflow-hidden">
