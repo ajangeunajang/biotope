@@ -1,14 +1,14 @@
-'use client';
-import { useState, useEffect, Suspense, lazy, useRef } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Head from 'next/head';
-import Image from 'next/image';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+"use client";
+import { useState, useEffect, Suspense, lazy, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Head from "next/head";
+import Image from "next/image";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 // Lazy loading 컴포넌트들
-const About = lazy(() => import('./components/About'));
-const Projects = lazy(() => import('./components/Projects'));
-const Lab = lazy(() => import('./components/Lab'));
+const About = lazy(() => import("./components/About"));
+const Projects = lazy(() => import("./components/Projects"));
+const Lab = lazy(() => import("./components/Lab"));
 
 // 로딩 컴포넌트
 const LoadingFallback = () => (
@@ -56,8 +56,8 @@ const StickyPath = ({ d, fill, pathRef, mouseX, mouseY }) => {
       }
     };
 
-    const unsubscribeX = mouseX.on('change', updatePosition);
-    const unsubscribeY = mouseY.on('change', updatePosition);
+    const unsubscribeX = mouseX.on("change", updatePosition);
+    const unsubscribeY = mouseY.on("change", updatePosition);
 
     return () => {
       unsubscribeX();
@@ -79,7 +79,15 @@ const StickyPath = ({ d, fill, pathRef, mouseX, mouseY }) => {
 };
 
 // Sticky Cursor SVG 컴포넌트
-const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width, height }) => {
+const StickySVG = ({
+  children,
+  onClick,
+  onMouseEnter,
+  className,
+  viewBox,
+  width,
+  height,
+}) => {
   const svgRef = useRef(null);
   const pathRefs = useRef([]);
   const mouseX = useMotionValue(0);
@@ -90,9 +98,9 @@ const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width,
   useEffect(() => {
     const checkTouchDevice = () => {
       setIsTouchDevice(
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0
+        "ontouchstart" in window ||
+          navigator.maxTouchPoints > 0 ||
+          navigator.msMaxTouchPoints > 0,
       );
     };
 
@@ -107,7 +115,7 @@ const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width,
     const svgX = e.clientX - rect.left;
     const svgY = e.clientY - rect.top;
 
-    const viewBoxValues = viewBox.split(' ').map(Number);
+    const viewBoxValues = viewBox.split(" ").map(Number);
     const scaleX = viewBoxValues[2] / rect.width;
     const scaleY = viewBoxValues[3] / rect.height;
 
@@ -122,23 +130,23 @@ const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width,
 
   const enhancedChildren = Array.isArray(children)
     ? children.map((child, index) => {
-      if (child?.type === 'path') {
-        if (!pathRefs.current[index]) {
-          pathRefs.current[index] = { current: null };
+        if (child?.type === "path") {
+          if (!pathRefs.current[index]) {
+            pathRefs.current[index] = { current: null };
+          }
+          return (
+            <StickyPath
+              key={index}
+              d={child.props.d}
+              fill={child.props.fill}
+              pathRef={pathRefs.current[index]}
+              mouseX={mouseX}
+              mouseY={mouseY}
+            />
+          );
         }
-        return (
-          <StickyPath
-            key={index}
-            d={child.props.d}
-            fill={child.props.fill}
-            pathRef={pathRefs.current[index]}
-            mouseX={mouseX}
-            mouseY={mouseY}
-          />
-        );
-      }
-      return child;
-    })
+        return child;
+      })
     : children;
 
   return (
@@ -154,7 +162,7 @@ const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width,
       height={height}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ overflow: 'visible' }}
+      style={{ overflow: "visible" }}
     >
       {enhancedChildren}
     </svg>
@@ -163,7 +171,7 @@ const StickySVG = ({ children, onClick, onMouseEnter, className, viewBox, width,
 
 // SearchParams를 사용하는 컴포넌트를 별도로 분리
 function HomeContent() {
-  const [currentPage, setCurrentPage] = useState('');
+  const [currentPage, setCurrentPage] = useState("");
   const [preloadedComponents, setPreloadedComponents] = useState(new Set());
   const [isNightMode, setIsNightMode] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -176,14 +184,14 @@ function HomeContent() {
       setScrollY(window.scrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // URL 파라미터와 상태 동기화
   useEffect(() => {
-    const page = searchParams.get('page');
-    if (page && ['about', 'projects', 'lab'].includes(page)) {
+    const page = searchParams.get("page");
+    if (page && ["about", "projects", "lab"].includes(page)) {
       setCurrentPage(page);
     }
   }, [searchParams]);
@@ -192,14 +200,14 @@ function HomeContent() {
   const preloadComponent = (componentName) => {
     if (!preloadedComponents.has(componentName)) {
       switch (componentName) {
-        case 'about':
-          import('./components/About');
+        case "about":
+          import("./components/About");
           break;
-        case 'projects':
-          import('./components/Projects');
+        case "projects":
+          import("./components/Projects");
           break;
-        case 'lab':
-          import('./components/Lab');
+        case "lab":
+          import("./components/Lab");
           break;
       }
       setPreloadedComponents((prev) => new Set([...prev, componentName]));
@@ -211,9 +219,9 @@ function HomeContent() {
     // URL 업데이트 (브라우저 히스토리에 추가)
     const params = new URLSearchParams(searchParams);
     if (page) {
-      params.set('page', page);
+      params.set("page", page);
     } else {
-      params.delete('page');
+      params.delete("page");
     }
     router.push(`?${params.toString()}`, { scroll: false });
   };
@@ -226,29 +234,29 @@ function HomeContent() {
   // 페이지별 메타데이터 설정
   const getPageMetadata = () => {
     switch (currentPage) {
-      case 'about':
+      case "about":
         return {
-          title: 'About - BIOTOPE',
+          title: "About - BIOTOPE",
           description:
-            '공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오',
+            "공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오",
         };
-      case 'projects':
+      case "projects":
         return {
-          title: 'Projects - BIOTOPE',
+          title: "Projects - BIOTOPE",
           description:
-            '공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오',
+            "공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오",
         };
-      case 'lab':
+      case "lab":
         return {
-          title: 'Lab - BIOTOPE',
+          title: "Lab - BIOTOPE",
           description:
-            '공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오',
+            "공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오",
         };
       default:
         return {
-          title: 'BIOTOPE',
+          title: "BIOTOPE",
           description:
-            '공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오',
+            "공간을 매개로 기술과 예술의 경계를 탐구하는 미디어 크리에이티브 스튜디오",
         };
     }
   };
@@ -256,7 +264,7 @@ function HomeContent() {
   const metadata = getPageMetadata();
 
   // 푸터 높이와 로고 이동 거리 계산
-  const footerHeight = 40; // 푸터 높이 (px)
+  const footerHeight = 60; // 푸터 높이 (px)
   const logoOffset = Math.min(scrollY, footerHeight);
 
   return (
@@ -268,19 +276,23 @@ function HomeContent() {
         <meta property="og:description" content={metadata.description} />
         <meta name="twitter:title" content={metadata.title} />
         <meta name="twitter:description" content={metadata.description} />
-        <meta name="format-detection" content="telephone=no, email=no, address=no" />
+        <meta
+          name="format-detection"
+          content="telephone=no, email=no, address=no"
+        />
       </Head>
       <div
-        className="h-[calc(100vh+40px)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="h-[calc(100vh+60px)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
         <div
-          className={`fixed top-0 right-0 overflow-hidden transition-all duration-800 ${currentPage === "about"
-            ? `w-2/3 h-3/4 m-4 rounded-4xl lg:rounded-[100px] bg-[#C1FF00]`
-            : currentPage === "lab"
-              ? "w-full h-full bg-[#A6A6A6]"
-              : "w-full h-full bg-[#C1FF00]"
-            }`}
+          className={`fixed top-0 right-0 overflow-hidden transition-all duration-800 ${
+            currentPage === "about"
+              ? `w-2/3 h-3/4 m-4 rounded-4xl lg:rounded-[100px] bg-[#C1FF00]`
+              : currentPage === "lab"
+                ? "w-full h-full bg-[#A6A6A6]"
+                : "w-full h-full bg-[#C1FF00]"
+          }`}
         >
           {/* Light mode image layer */}
           <Image
@@ -288,12 +300,13 @@ function HomeContent() {
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top transition-opacity duration-[1500ms] ease-in-out ${currentPage === "lab"
-              ? "opacity-0"
-              : isNightMode
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top transition-opacity duration-[1500ms] ease-in-out ${
+              currentPage === "lab"
                 ? "opacity-0"
-                : "opacity-100"
-              }`}
+                : isNightMode
+                  ? "opacity-0"
+                  : "opacity-100"
+            }`}
           />
           {/* Night mode image layer */}
           <Image
@@ -301,20 +314,22 @@ function HomeContent() {
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top blur-xs lg:blur-sm transition-opacity duration-[1500ms] ease-in-out ${currentPage === "lab"
-              ? "opacity-0"
-              : isNightMode
-                ? "opacity-100"
-                : "opacity-0"
-              }`}
+            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top blur-xs lg:blur-sm transition-opacity duration-[1500ms] ease-in-out ${
+              currentPage === "lab"
+                ? "opacity-0"
+                : isNightMode
+                  ? "opacity-100"
+                  : "opacity-0"
+            }`}
           />
         </div>
         <main className="relative">
           <div
-            className={`w-full h-full fixed transition-all duration-1200 ease-in-out ${currentPage === "about"
-              ? "opacity-100 blur-0"
-              : "opacity-0 blur-2xl"
-              }`}
+            className={`w-full h-full fixed transition-all duration-1200 ease-in-out ${
+              currentPage === "about"
+                ? "opacity-100 blur-0"
+                : "opacity-0 blur-2xl"
+            }`}
           >
             {currentPage === "about" && (
               <Suspense fallback={<LoadingFallback />}>
@@ -324,10 +339,11 @@ function HomeContent() {
           </div>
 
           <div
-            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${currentPage === "projects"
-              ? "opacity-100 transform translate-x-0"
-              : "opacity-0 transform translate-x-full absolute inset-0"
-              }`}
+            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${
+              currentPage === "projects"
+                ? "opacity-100 transform translate-x-0"
+                : "opacity-0 transform translate-x-full absolute inset-0"
+            }`}
           >
             {currentPage === "projects" && (
               <Suspense fallback={<LoadingFallback />}>
@@ -337,10 +353,11 @@ function HomeContent() {
           </div>
 
           <div
-            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${currentPage === "lab"
-              ? "opacity-100 transform translate-x-0"
-              : "opacity-0 transform translate-x-full absolute inset-0"
-              }`}
+            className={`w-full h-full fixed transition-all duration-1000 ease-in-out ${
+              currentPage === "lab"
+                ? "opacity-100 transform translate-x-0"
+                : "opacity-0 transform translate-x-full absolute inset-0"
+            }`}
           >
             {currentPage === "lab" && (
               <Suspense fallback={<LoadingFallback />}>
@@ -384,10 +401,11 @@ function HomeContent() {
               viewBox="0 0 532 344"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`max-w-[100vw] max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${currentPage !== ""
-                ? "hover:blur-md hover:invert"
-                : "invert blur-xs"
-                }`}
+              className={`max-w-[100vw] max-h-[30vh] lg:max-h-[50vh] transition-all duration-600 ${
+                currentPage !== ""
+                  ? "hover:blur-md hover:invert"
+                  : "invert blur-xs"
+              }`}
               onClick={() => handlePageChange("")}
             >
               <path
@@ -401,23 +419,49 @@ function HomeContent() {
           <footer
             className="fixed bottom-0 left-1/2 -translate-x-1/2 pb-2 w-auto transition-transform duration-200"
             style={{ transform: `translateY(${footerHeight - logoOffset}px)` }}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <div className="w-[520px] max-w-[100vw] text-black text-sm lg:text-lg flex-wrap flex flex-row gap-2 items-center justify-center">
-              <span className="scale-x-[0.6] -mx-6 sm:-mx-4">© 2026 biotope</span>
-              <span className="scale-x-[0.6] -mx-6 sm:-mx-4 decoration-transparent">서울특별시 성북구 고려대로7길 4</span>
-              <span className="scale-x-[0.6] -mx-6 sm:-mx-4 decoration-transparent">070-4571-9907</span>
-              <a href='https://www.instagram.com/biotopelab/' target='_blank' rel='noopener noreferrer' className='pl-8'>
-                <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12.0244 0C14.1647 0.0274236 15.8916 1.79286 15.8916 3.96582V12.2471C15.8644 14.4133 14.121 16.1609 11.9746 16.1611H3.91699C1.77056 16.1609 0.027181 14.4133 0 12.2471V3.96582C1.51216e-07 1.79286 1.72693 0.0274234 3.86719 0H12.0244ZM3.91699 1.49609C2.57006 1.49633 1.47852 2.60234 1.47852 3.96582V12.1953C1.47852 13.5588 2.57006 14.6648 3.91699 14.665H11.9746C13.3215 14.6648 14.4131 13.5588 14.4131 12.1953V3.96582C14.4131 2.60234 13.3215 1.49633 11.9746 1.49609H3.91699ZM7.94531 4.04004C10.2511 4.04004 12.1211 5.84967 12.1211 8.08105C12.1208 10.3122 10.2509 12.1211 7.94531 12.1211C5.63994 12.1208 3.77078 10.3121 3.77051 8.08105C3.77051 5.84983 5.63977 4.04029 7.94531 4.04004ZM7.94531 5.50977C6.47823 5.51002 5.28906 6.66124 5.28906 8.08105C5.28933 9.50065 6.4784 10.6511 7.94531 10.6514C9.41245 10.6514 10.6023 9.50081 10.6025 8.08105C10.6025 6.66108 9.41262 5.50977 7.94531 5.50977ZM12.5244 2.69336C12.8962 2.69336 13.1981 3.05489 13.1982 3.50098C13.1982 3.94725 12.8963 4.30957 12.5244 4.30957C12.1527 4.30933 11.8516 3.94711 11.8516 3.50098C11.8517 3.05504 12.1528 2.6936 12.5244 2.69336Z" fill="black" />
-                </svg>
-              </a>
+            <div className="leading-none w-[520px] max-w-[100vw] text-black text-sm lg:text-lg flex flex-col gap-1 items-center justify-center">
+              <div className="flex flex-row flex-wrap gap-2 items-center justify-center">
+                <span className="scale-x-[0.6] -mx-6 sm:-mx-4">
+                  © 2026 biotope
+                </span>
+                <span className="scale-x-[0.6] -mx-6 sm:-mx-4 decoration-transparent">
+                  서울특별시 성북구 고려대로7길 4
+                </span>
+                <span className="scale-x-[0.6] -mx-6 sm:-mx-4 decoration-transparent">
+                  070-4571-9907
+                </span>
+                <a
+                  href="https://www.instagram.com/biotopelab/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pl-8"
+                >
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.0244 0C14.1647 0.0274236 15.8916 1.79286 15.8916 3.96582V12.2471C15.8644 14.4133 14.121 16.1609 11.9746 16.1611H3.91699C1.77056 16.1609 0.027181 14.4133 0 12.2471V3.96582C1.51216e-07 1.79286 1.72693 0.0274234 3.86719 0H12.0244ZM3.91699 1.49609C2.57006 1.49633 1.47852 2.60234 1.47852 3.96582V12.1953C1.47852 13.5588 2.57006 14.6648 3.91699 14.665H11.9746C13.3215 14.6648 14.4131 13.5588 14.4131 12.1953V3.96582C14.4131 2.60234 13.3215 1.49633 11.9746 1.49609H3.91699ZM7.94531 4.04004C10.2511 4.04004 12.1211 5.84967 12.1211 8.08105C12.1208 10.3122 10.2509 12.1211 7.94531 12.1211C5.63994 12.1208 3.77078 10.3121 3.77051 8.08105C3.77051 5.84983 5.63977 4.04029 7.94531 4.04004ZM7.94531 5.50977C6.47823 5.51002 5.28906 6.66124 5.28906 8.08105C5.28933 9.50065 6.4784 10.6511 7.94531 10.6514C9.41245 10.6514 10.6023 9.50081 10.6025 8.08105C10.6025 6.66108 9.41262 5.50977 7.94531 5.50977ZM12.5244 2.69336C12.8962 2.69336 13.1981 3.05489 13.1982 3.50098C13.1982 3.94725 12.8963 4.30957 12.5244 4.30957C12.1527 4.30933 11.8516 3.94711 11.8516 3.50098C11.8517 3.05504 12.1528 2.6936 12.5244 2.69336Z"
+                      fill="black"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <span className="scale-x-[0.6]">
+                Website Design & Development by (cooperative)Blue
+              </span>
             </div>
-          </footer>
+           </footer>
         </header>
         <nav
-          className={`fixed w-auto top-2 lg:top-0 p-4 transition-all duration-600 overflow-visible ${currentPage === "" ? "left-1/2 -translate-x-1/2" : "left-0"
-            }`}
+          className={`fixed w-auto top-2 lg:top-0 p-4 transition-all duration-600 overflow-visible ${
+            currentPage === "" ? "left-1/2 -translate-x-1/2" : "left-0"
+          }`}
         >
           <ul className="overflow-visible">
             <li
@@ -427,13 +471,15 @@ function HomeContent() {
                 width="359"
                 height="141"
                 viewBox="0 0 359 141"
-                className={`h-full w-auto relative transition-all duration-200 ease-in-out ${currentPage === "about"
-                  ? "invert sm:sm:blur-xs"
-                  : " hover:invert hover:sm:blur-xs"
-                  } ${currentPage === ""
+                className={`h-full w-auto relative transition-all duration-200 ease-in-out ${
+                  currentPage === "about"
+                    ? "invert sm:sm:blur-xs"
+                    : " hover:invert hover:sm:blur-xs"
+                } ${
+                  currentPage === ""
                     ? "left-1/2 -translate-x-1/2"
                     : "left-0 -translate-x-0"
-                  }`}
+                }`}
                 onClick={() => handlePageChange("about")}
                 onMouseEnter={() => handleMouseEnter("about")}
               >
@@ -466,13 +512,15 @@ function HomeContent() {
                 width="523"
                 height="142"
                 viewBox="0 0 523 142"
-                className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${currentPage === ""
-                  ? "left-1/2 -translate-x-1/2"
-                  : "left-0 -translate-x-0"
-                  } ${currentPage === "projects"
+                className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${
+                  currentPage === ""
+                    ? "left-1/2 -translate-x-1/2"
+                    : "left-0 -translate-x-0"
+                } ${
+                  currentPage === "projects"
                     ? "invert sm:sm:blur-xs"
                     : " hover:invert hover:sm:blur-xs"
-                  }`}
+                }`}
                 onClick={() => handlePageChange("projects")}
                 onMouseEnter={() => handleMouseEnter("projects")}
               >
@@ -510,18 +558,22 @@ function HomeContent() {
                 />
               </StickySVG>
             </li>
-            <li className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}>
+            <li
+              className={`mb-4 lg:mb-4 h-[4vh] sm:h-[7vh] lg:h-[16vh] overflow-visible`}
+            >
               <StickySVG
                 width="203"
                 height="136"
                 viewBox="0 0 203 136"
-                className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${currentPage === "lab"
-                  ? "invert sm:blur-xs"
-                  : " hover:invert hover:blur-xs"
-                  }  ${currentPage === ""
+                className={`h-full w-auto relative transition-all duration-200 delay-200 ease-in-out ${
+                  currentPage === "lab"
+                    ? "invert sm:blur-xs"
+                    : " hover:invert hover:blur-xs"
+                }  ${
+                  currentPage === ""
                     ? "left-1/2 -translate-x-1/2"
                     : "left-0 -translate-x-0"
-                  }`}
+                }`}
                 onClick={() => handlePageChange("lab")}
                 onMouseEnter={() => handleMouseEnter("lab")}
               >
@@ -541,7 +593,6 @@ function HomeContent() {
             </li>
           </ul>
         </nav>
-
       </div>
     </>
   );
