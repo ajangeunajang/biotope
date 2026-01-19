@@ -300,7 +300,7 @@ function HomeContent() {
             alt="background"
             width={1200}
             height={1000}
-            className={`absolute top-[-50px] right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top transition-opacity duration-[1500ms] ease-in-out ${
+            className={`absolute top-[-50px] sm:right-[-50px] rounded-4xl lg:rounded-[100px] scale-140 sm:scale-120 w-screen h-screen object-cover object-right-top transition-opacity duration-[1500ms] ease-in-out ${
               currentPage === "lab"
                 ? "opacity-0"
                 : isNightMode
@@ -421,7 +421,7 @@ function HomeContent() {
             style={{ transform: `translateY(${footerHeight - logoOffset}px)` }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <div className="leading-none w-[520px] max-w-[100vw] text-black text-sm lg:text-lg flex flex-col gap-1 items-center justify-center">
+            <div className="leading-none w-[520px] min-w-[325px] max-w-[100vw] text-black text-sm lg:text-lg flex flex-col gap-1 items-center justify-center">
               <div className="flex flex-row flex-wrap gap-2 items-center justify-center">
                 <span className="scale-x-[0.6] -mx-6 sm:-mx-4">
                   © 2026 biotope
@@ -436,7 +436,7 @@ function HomeContent() {
                   href="https://www.instagram.com/biotopelab/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="pl-8"
+                  className="pl-6"
                 >
                   <svg
                     width="16"
@@ -452,11 +452,11 @@ function HomeContent() {
                   </svg>
                 </a>
               </div>
-              <span className="scale-x-[0.6]">
+              <div className="w-3/2 scale-x-[0.6] text-center">
                 Website Design & Development by (cooperative)Blue
-              </span>
+              </div>
             </div>
-           </footer>
+          </footer>
         </header>
         <nav
           className={`fixed w-auto top-2 lg:top-0 p-4 transition-all duration-600 overflow-visible ${
